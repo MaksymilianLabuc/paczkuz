@@ -15,13 +15,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1107.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1107.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.janbat.paczkuz.ZlecenieWindowController">
    <children>
       <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" onAction="#switchToLoginWindow" text="Wyloguj" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -48,24 +48,19 @@
                         <FlowPane alignment="CENTER" hgap="10.0" prefHeight="30.0" prefWidth="600.0">
                            <children>
                               <Label text="Start" />
-                              <TextField />
+                              <TextField fx:id="start" />
                            </children>
                         </FlowPane>
                         <FlowPane alignment="CENTER" hgap="10.0" prefHeight="30.0" prefWidth="600.0">
                            <children>
                               <Label prefHeight="17.0" prefWidth="25.0" text="Cel" />
-                              <TextField prefHeight="25.0" prefWidth="149.0" />
+                              <TextField fx:id="cel" prefHeight="25.0" prefWidth="149.0" />
                            </children>
                         </FlowPane>
                         <FlowPane alignment="CENTER" hgap="10.0" prefHeight="30.0" prefWidth="600.0">
                            <children>
                               <Label text="Typ trasy" />
-                              <MenuButton mnemonicParsing="false" text="MenuButton">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" text="Action 1" />
-                                  <MenuItem mnemonicParsing="false" text="Action 2" />
-                                </items>
-                              </MenuButton>
+                              <MenuButton fx:id="typTrasy" mnemonicParsing="false" onAction="#menuClick" />
                            </children>
                         </FlowPane>
                         <FlowPane alignment="CENTER" hgap="10.0" prefHeight="30.0" prefWidth="600.0">
@@ -107,7 +102,7 @@
                            <children>
                               <Button mnemonicParsing="false" text="Oblicz" />
                               <Button mnemonicParsing="false" text="Zapisz" />
-                              <Button mnemonicParsing="false" text="Anuluj" />
+                              <Button mnemonicParsing="false" onAction="#switchToLoginWindow" text="Anuluj" />
                            </children>
                         </HBox>
                      </children>
@@ -116,7 +111,10 @@
                      </padding></VBox>
                </content>
             </Tab>
-          <Tab text="Untitled Tab 2" />
+          <Tab text="Zapisane zlecenia">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+               </content></Tab>
         </tabs>
          <VBox.margin>
             <Insets />
