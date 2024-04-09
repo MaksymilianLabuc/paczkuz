@@ -1,0 +1,5 @@
+teg,cos	
+tego,cos
+tego,cos
+tego	,cos
+cos,tegi

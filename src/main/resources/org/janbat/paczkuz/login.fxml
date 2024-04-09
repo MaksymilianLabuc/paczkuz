@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.PasswordField?>
 <VBox alignment="CENTER" maxHeight="257.0" maxWidth="240.0" minHeight="257.0" minWidth="240.0" prefHeight="257.0" prefWidth="240.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.janbat.paczkuz.LoginWindowController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -30,10 +31,10 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <children>
-            <Button alignment="CENTER" maxHeight="50.0" maxWidth="100.0" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onAction="#switchToZlecenieWindow" prefHeight="50.0" prefWidth="100.0" text="Login" GridPane.rowIndex="4" GridPane.rowSpan="2" />
-            <Button alignment="CENTER" maxHeight="50.0" maxWidth="100.0" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Rejestracja" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.rowSpan="2" />
-            <TextArea maxHeight="25.0" maxWidth="200.0" minHeight="25.0" minWidth="200.0" prefHeight="25.0" prefWidth="200.0" promptText="haslo" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-            <TextArea maxHeight="25.0" maxWidth="200.0" minHeight="25.0" minWidth="200.0" prefHeight="25.0" prefWidth="200.0" promptText="login" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <Button alignment="CENTER" maxHeight="50.0" maxWidth="100.0" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onAction="#login" prefHeight="50.0" prefWidth="100.0" text="Login" GridPane.rowIndex="4" GridPane.rowSpan="2" fx:id="Button1"/>
+            <Button alignment="CENTER" maxHeight="50.0" maxWidth="100.0" minHeight="50.0" minWidth="100.0" mnemonicParsing="false" onAction="#register" prefHeight="50.0" prefWidth="100.0" text="Rejestracja" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.rowSpan="2" />
+            <PasswordField maxHeight="25.0" maxWidth="200.0" minHeight="25.0" minWidth="200.0" prefHeight="25.0" prefWidth="200.0" promptText="haslo" GridPane.columnSpan="2" GridPane.rowIndex="3" fx:id="PasswordField1"/>
+            <TextArea maxHeight="25.0" maxWidth="200.0" minHeight="25.0" minWidth="200.0" prefHeight="25.0" prefWidth="200.0" promptText="login" GridPane.columnSpan="2" GridPane.rowIndex="2" fx:id="TextArea1"/>
             <Label alignment="CENTER" maxHeight="50.0" maxWidth="200.0" minHeight="50.0" minWidth="200.0" prefHeight="50.0" prefWidth="200.0" text="PaczkUZ" GridPane.columnSpan="2" GridPane.rowSpan="2">
                 <font>
                     <Font size="40.0" />
