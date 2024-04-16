@@ -2,4 +2,6 @@ teg,cos
 tego,cos
 tego,cos
 tego	,cos
-cos,tegi
+cos,teg,
+cosi,tegi
+g,g

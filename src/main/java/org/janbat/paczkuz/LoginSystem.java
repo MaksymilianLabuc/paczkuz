@@ -7,6 +7,11 @@ public class LoginSystem {
     private static final String FILE_NAME = "users.txt";
 
     public static boolean register(String username, String password) {
+
+        if (username.isEmpty()||password.isEmpty()) { //sprawdzanie czy jest cos wpisane w pola tekstowe
+            System.out.println("Nie można utworzyć pustego użytkownika.");
+            return false;
+        }
         if (userExists(username)) {
             System.out.println("Użytkownik już istnieje!");
             return false;
@@ -27,7 +32,7 @@ public class LoginSystem {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                if (line.split(",")[0].equals(username)) {
+                if (line.contains(",") && line.split(",")[0].equals(username)) {
                     return true;
                 }
             }
@@ -39,6 +44,10 @@ public class LoginSystem {
     }
 
     public static boolean login(String username, String password) {
+        if (username.isEmpty()||password.isEmpty()) { //sprawdzanie czy jest cos wpisane w pola tekstowe
+            System.out.println("Błędne dane.");
+            return false;
+        }
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
             while ((line = reader.readLine()) != null) {
