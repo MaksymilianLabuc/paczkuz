@@ -35,6 +35,14 @@ public class ZlecenieWindowController {
         stage.show();
     }
     @FXML
+    public void switchToEdycjaTowarow(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("edycjaSprzetuPojazdow.fxml"));
+        Stage stage = (Stage) root.getScene().getWindow();
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
     public void menuClick(ActionEvent event){
         typTrasy.setText("test");
         System.out.println("HERE");

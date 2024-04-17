@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.janbat.paczkuz.edycjaSprzetuController">
    <children>
       <MenuBar>
         <menus>
@@ -85,11 +85,11 @@
                      <children>
                         <FlowPane prefHeight="200.0" prefWidth="600.0">
                            <children>
-                              <TableView prefHeight="200.0" prefWidth="600.0">
+                              <TableView fx:id="towaryTab" prefHeight="200.0" prefWidth="600.0">
                                  <columns>
-                                    <TableColumn prefWidth="200.0" text="Nazwa" />
-                                    <TableColumn prefWidth="200.0" text="Ciężar" />
-                                    <TableColumn prefWidth="200.0" text="Ilość" />
+                                    <TableColumn fx:id="colNazwa" prefWidth="200.0" text="Nazwa" />
+                                    <TableColumn fx:id="colCiezar" prefWidth="200.0" text="Ciężar" />
+                                    <TableColumn fx:id="colilosc" prefWidth="200.0" text="Ilość" />
                                  </columns>
                               </TableView>
                            </children>
@@ -97,25 +97,25 @@
                         <FlowPane prefHeight="50.0" prefWidth="200.0">
                            <children>
                               <Label prefHeight="18.0" prefWidth="200.0" text="Nazwa" />
-                              <TextArea prefHeight="50.0" prefWidth="400.0" />
+                              <TextArea fx:id="nazwa" prefHeight="50.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>
                         <FlowPane prefHeight="50.0" prefWidth="200.0">
                            <children>
                               <Label prefHeight="18.0" prefWidth="200.0" text="Ciężar" />
-                              <TextArea prefHeight="50.0" prefWidth="400.0" />
+                              <TextArea fx:id="ciezar" prefHeight="50.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>
                         <FlowPane prefHeight="50.0" prefWidth="200.0">
                            <children>
                               <Label prefHeight="18.0" prefWidth="200.0" text="Ilość" />
-                              <TextArea prefHeight="50.0" prefWidth="400.0" />
+                              <TextArea fx:id="ilosc" prefHeight="50.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>
                         <FlowPane prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <Button mnemonicParsing="false" prefWidth="300.0" text="Dodaj/zapisz" />
-                              <Button mnemonicParsing="false" prefWidth="300.0" text="Usuń" />
+                              <Button mnemonicParsing="false" onAction="#zapiszTowar" prefWidth="300.0" text="Dodaj/zapisz" />
+                              <Button mnemonicParsing="false" onAction="#usunTowar" prefWidth="300.0" text="Usuń" />
                            </children>
                         </FlowPane>
                      </children>

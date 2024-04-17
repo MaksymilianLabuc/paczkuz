@@ -2,6 +2,5 @@ teg,cos
 tego,cos
 tego,cos
 tego	,cos
-cos,teg,
-cosi,tegi
-g,g
+cos,tegi
+admin,admin
