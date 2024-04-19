@@ -2,11 +2,11 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -60,18 +60,13 @@
                         <FlowPane alignment="CENTER" hgap="10.0" prefHeight="30.0" prefWidth="600.0">
                            <children>
                               <Label text="Typ trasy" />
-                              <MenuButton fx:id="typTrasy" mnemonicParsing="false" onAction="#menuClick" />
+                              <ChoiceBox prefWidth="150.0" />
                            </children>
                         </FlowPane>
                         <FlowPane alignment="CENTER" hgap="10.0" prefHeight="30.0" prefWidth="600.0">
                            <children>
                               <Label text="Pojazd" />
-                              <MenuButton mnemonicParsing="false" text="MenuButton">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" text="Action 1" />
-                                  <MenuItem mnemonicParsing="false" text="Action 2" />
-                                </items>
-                              </MenuButton>
+                              <ChoiceBox fx:id="pojazdyChoice" prefWidth="150.0" />
                            </children>
                         </FlowPane>
                         <FlowPane alignment="CENTER" hgap="10.0" prefHeight="30.0" prefWidth="600.0">
@@ -101,7 +96,7 @@
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                            <children>
                               <Button mnemonicParsing="false" text="Oblicz" />
-                              <Button mnemonicParsing="false" text="Zapisz" />
+                              <Button mnemonicParsing="false" onAction="#zapisz" text="Zapisz" />
                               <Button mnemonicParsing="false" onAction="#switchToLoginWindow" text="Anuluj" />
                            </children>
                         </HBox>

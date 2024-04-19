@@ -16,7 +16,10 @@ public class Towary {
 
     public static void wczytaj(){
         File f = new File("towary.json");
-        if(f.length() == 0){
+        if(f.length() == 0 || !f.exists()){
+            System.out.println("HEREEEEE");
+            towaryArrayList = new ArrayList<Towar>();
+            towaryObs = FXCollections.observableList(towaryArrayList);
             return;
         }
         StringBuilder result = new StringBuilder();
