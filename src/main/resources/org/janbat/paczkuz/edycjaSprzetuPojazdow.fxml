@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -42,11 +43,11 @@
                      <children>
                         <FlowPane prefHeight="200.0" prefWidth="600.0">
                            <children>
-                              <TableView prefHeight="200.0" prefWidth="600.0">
+                              <TableView fx:id="pojazdTabela" prefHeight="200.0" prefWidth="600.0">
                                 <columns>
-                                  <TableColumn prefWidth="200.0" text="Nazwa" />
-                                  <TableColumn prefWidth="200.0" text="Ładowność" />
-                                    <TableColumn prefWidth="200.0" text="Spalanie (l/100km)" />
+                                  <TableColumn fx:id="colPojazdNazwa" prefWidth="200.0" text="Nazwa" />
+                                  <TableColumn fx:id="colPojazdLadownosc" prefWidth="200.0" text="Ładowność" />
+                                    <TableColumn fx:id="colPojazdSpalanie" prefWidth="200.0" text="Spalanie (l/100km)" />
                                 </columns>
                               </TableView>
                            </children>
@@ -54,25 +55,25 @@
                         <FlowPane prefHeight="50.0" prefWidth="200.0">
                            <children>
                               <Label prefHeight="18.0" prefWidth="200.0" text="Nazwa" />
-                              <TextArea prefHeight="50.0" prefWidth="400.0" />
+                              <TextField fx:id="pojazdNazwaFIeld" prefHeight="50.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>
                         <FlowPane layoutX="10.0" layoutY="210.0" prefHeight="50.0" prefWidth="200.0">
                            <children>
                               <Label prefHeight="18.0" prefWidth="200.0" text="Ładowność" />
-                              <TextArea prefHeight="50.0" prefWidth="400.0" />
+                              <TextField fx:id="ladownoscPojazdField" prefHeight="50.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>
                         <FlowPane layoutX="10.0" layoutY="260.0" prefHeight="50.0" prefWidth="200.0">
                            <children>
                               <Label prefHeight="18.0" prefWidth="200.0" text="Spalanie (l/100km)" />
-                              <TextArea prefHeight="50.0" prefWidth="400.0" />
+                              <TextField fx:id="pojazdSpalanieField" prefHeight="50.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>
                         <FlowPane layoutX="10.0" layoutY="311.0" prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <Button mnemonicParsing="false" prefWidth="300.0" text="Dodaj/zapisz" />
-                              <Button mnemonicParsing="false" prefWidth="300.0" text="Usuń" />
+                              <Button mnemonicParsing="false" onAction="#zapiszPojazd" prefWidth="300.0" text="Dodaj/zapisz" />
+                              <Button mnemonicParsing="false" onAction="#usunPojazd" prefWidth="300.0" text="Usuń" />
                            </children>
                         </FlowPane>
                      </children>
