@@ -9,9 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import java.io.*;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +22,7 @@ public class edycjaSprzetuController {
     @FXML
     TextArea ilosc;
     private ArrayList<Towar> towary = new ArrayList<>();
-    //private List towary = new ArrayList<Towar>();
+    //private List<Towar> towary = new ArrayList();
     @FXML
     TableView towaryTab;
     @FXML
@@ -33,20 +31,17 @@ public class edycjaSprzetuController {
     private TableColumn<Towar, Integer> colNazwa;
     @FXML
     private TableColumn<Towar, Integer> colilosc;
-    private ObservableList<Towar> dane = FXCollections.observableArrayList();
-    //private ObservableList<Towar> dane = FXCollections.observableList(towary);
+    //private ObservableList<Towar> dane = FXCollections.observableArrayList();
+    private ObservableList<Towar> dane;
     @FXML
     public void initialize(){
         wczytajTowary();
+        //Towary.wczytaj();
+        //dane = Towary.getDane();
+        dane = FXCollections.observableList(towary);
         colCiezar.setCellValueFactory(new PropertyValueFactory<>("ciezar"));
         colNazwa.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
         colilosc.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
-//        for(int i=0; i< towary.size(); i++){
-//            towaryTab.getItems().add(towary.get(i));
-//        }
-         for(int i=0; i< towary.size(); i++){
-            dane.add(towary.get(i));
-         }
         towaryTab.setItems(dane);
     }
     public void wczytajTowary(){
@@ -81,7 +76,7 @@ public class edycjaSprzetuController {
         t.setCiezar(Integer.parseInt(ciezar.getText()));
         t.setIlosc(Integer.parseInt(ilosc.getText()));
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        towary.add(t);
+        //towary.add(t);
         dane.add(t);
         Type towarType = new TypeToken<ArrayList<Towar>>(){}.getType();
         String json = gson.toJson(towary,towarType);
@@ -99,8 +94,8 @@ public class edycjaSprzetuController {
 
     public void usunTowar(){
         int idx = towaryTab.getSelectionModel().getSelectedIndex();
-        towary.remove(idx);
         dane.remove(idx);
+        //towary.remove(idx);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Type towarType = new TypeToken<ArrayList<Towar>>(){}.getType();
         String json = gson.toJson(towary,towarType);
@@ -112,4 +107,6 @@ public class edycjaSprzetuController {
             throw new RuntimeException(e);
         }
     }
+
+
 }

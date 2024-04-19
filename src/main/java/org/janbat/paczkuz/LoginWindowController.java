@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,10 +15,15 @@ public class LoginWindowController {
     @FXML
     private Label welcomeText;
     @FXML
-    private PasswordField PasswordField1;
+    private TextField TextArea1;
     @FXML
-    private TextArea TextArea1;
+    private PasswordField PasswordField1;
     LoginSystem log=new LoginSystem();
+    @FXML
+    public void initialize(){
+        TextArea1.setFocusTraversable(true);
+        PasswordField1.setFocusTraversable(true);
+    }
     @FXML
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
