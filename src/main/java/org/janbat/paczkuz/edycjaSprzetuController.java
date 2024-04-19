@@ -51,12 +51,13 @@ public class edycjaSprzetuController {
     private ObservableList pojazdy;
     @FXML
     public void initialize(){
-        wczytajTowary();
+        Towary.wczytaj();
+        //wczytajTowary();
         Pojazdy.wczytaj();
         pojazdy = Pojazdy.getPojazdyObs();
         //Towary.wczytaj();
         //dane = Towary.getDane();
-        dane = FXCollections.observableList(towary);
+        dane = Towary.getTowaryObs();
         colCiezar.setCellValueFactory(new PropertyValueFactory<>("ciezar"));
         colNazwa.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
         colilosc.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
@@ -70,26 +71,7 @@ public class edycjaSprzetuController {
     }
 
     public void wczytajTowary(){
-        File f = new File("towary.json");
-        if(f.length() == 0){
-            return;
-        }
-        StringBuilder result = new StringBuilder();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(f));
-            String line;
-            while((line = br.readLine()) != null){
-                result.append(line);
-            }
-        } catch (Exception e) {
 
-        }
-        System.out.println(result);
-        Gson gson = new Gson();
-        Type towarType = new TypeToken<ArrayList<Towar>>(){}.getType();
-        ArrayList<Towar> t = gson.fromJson(result.toString(), towarType);
-        towary = t;
-        System.out.println(towary.get(0).getClass());
     }
 
     public void zapiszPojazd(){
@@ -117,20 +99,7 @@ public class edycjaSprzetuController {
         t.setNazwa(nazwa.getText());
         t.setCiezar(Integer.parseInt(ciezar.getText()));
         t.setIlosc(Integer.parseInt(ilosc.getText()));
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        dane.add(t);
-        Type towarType = new TypeToken<ArrayList<Towar>>(){}.getType();
-        String json = gson.toJson(towary,towarType);
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("towary.json"));
-            writer.write(json);
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println("Here");
-
-
+        Towary.zapisz(t);
     }
 
     public void usunPojazd(){
@@ -143,17 +112,6 @@ public class edycjaSprzetuController {
     public void usunTowar(){
         int idx = towaryTab.getSelectionModel().getSelectedIndex();
         dane.remove(idx);
-        //towary.remove(idx);
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Type towarType = new TypeToken<ArrayList<Towar>>(){}.getType();
-        String json = gson.toJson(towary,towarType);
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("towary.json"));
-            writer.write(json);
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 
