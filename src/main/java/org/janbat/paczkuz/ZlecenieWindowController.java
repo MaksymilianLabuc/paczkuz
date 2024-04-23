@@ -9,11 +9,35 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class ZlecenieWindowController {
+    @FXML
+    private TableView<?> listaTowarowTab;
+    @FXML
+    private TableView<?> dodaneTowryTab;
+    @FXML
+    private TableColumn<Towar, String> ciezarColA;
+
+    @FXML
+    private TableColumn<Towar, String> ciezarColB;
+
+    @FXML
+    private TableColumn<Towar, Integer> iloscColA;
+
+    @FXML
+    private TableColumn<Towar, Integer> iloscColB;
+
+
+    @FXML
+    private TableColumn<Towar, Integer> nazwaColA;
+
+    @FXML
+    private TableColumn<Towar, Integer> nazwaColB;
+
     @FXML
     private ChoiceBox<String> pojazdyChoice;
     @FXML
@@ -27,13 +51,34 @@ public class ZlecenieWindowController {
 //    private ObservableList<Pojazd> pojazdyObs;
     private ObservableList<String> pojazdyObs;
     private MenuItem[] pojazdyItemy;
+    private ObservableList towary;
+    private ObservableList towaryWZleceniu;
+    private Zlecenie z;
     @FXML
     public void initialize(){
         Pojazdy.wczytaj();
         Zlecenia.wczytaj();
-        Towary.wczytaj();
         wczytajPojazdy();
+        Towary.wczytaj();
+        towary = Towary.getTowaryObs();
+        z = new Zlecenie();
+        towaryWZleceniu = FXCollections.observableList(z.towary);
 
+        nazwaColA.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
+        iloscColA.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
+        ciezarColA.setCellValueFactory(new PropertyValueFactory<>("ciezar"));
+
+        nazwaColB.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
+        iloscColB.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
+        ciezarColB.setCellValueFactory(new PropertyValueFactory<>("ciezar"));
+
+        listaTowarowTab.setItems(towary);
+        dodaneTowryTab.setItems(towaryWZleceniu);
+
+    }
+    public void dodajTowarDoZlecenia(){
+        int idx = listaTowarowTab.getSelectionModel().getSelectedIndex();
+        towaryWZleceniu.add(towary.get(idx));
     }
     public void zapisz(){
         Zlecenie z = new Zlecenie();
