@@ -4,12 +4,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
@@ -77,22 +78,31 @@
                               <Label text="[pozostala ladownosc]" />
                            </children>
                         </FlowPane>
-                        <FlowPane alignment="CENTER" hgap="10.0" prefHeight="30.0" prefWidth="600.0">
+                        <HBox prefHeight="200.0" prefWidth="1107.0">
                            <children>
-                              <HBox>
-                                 <children>
-                                    <ListView prefHeight="150.0" prefWidth="200.0" />
-                                 </children>
-                              </HBox>
+                              <TableView prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                <columns>
+                                  <TableColumn minWidth="-Infinity" prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                </columns>
+                              </TableView>
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                                  <children>
                                     <Button mnemonicParsing="false" text="Dodaj" />
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="48.0" text="Usun" />
+                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="49.0" text="Usun" />
                                  </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
                               </VBox>
-                              <ListView prefHeight="150.0" prefWidth="200.0" />
+                              <TableView prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                </columns>
+                              </TableView>
                            </children>
-                        </FlowPane>
+                        </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                            <children>
                               <Button mnemonicParsing="false" text="Oblicz" />

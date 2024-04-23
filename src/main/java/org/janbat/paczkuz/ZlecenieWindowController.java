@@ -8,10 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,7 +17,11 @@ public class ZlecenieWindowController {
     @FXML
     private ChoiceBox<String> pojazdyChoice;
     @FXML
+    ListView<String> towaryListView;
+    @FXML
     TextField cel;
+    @FXML
+    TextField start;
     @FXML
     private Parent root;
 //    private ObservableList<Pojazd> pojazdyObs;
@@ -32,11 +33,12 @@ public class ZlecenieWindowController {
         Zlecenia.wczytaj();
         Towary.wczytaj();
         wczytajPojazdy();
+
     }
     public void zapisz(){
         Zlecenie z = new Zlecenie();
         z.cel = cel.getText();
-        z.start = "start";
+        z.start = start.getText();
         z.towary.add(Towary.getTowaryArrayList().get(0));
         Zlecenia.zapisz(z);
     }
