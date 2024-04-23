@@ -5,6 +5,7 @@ import java.util.*;
 
 public class LoginSystem {
     private static final String FILE_NAME = "users.txt";
+    private static String user;
 
     public static boolean register(String username, String password) {
 
@@ -20,6 +21,7 @@ public class LoginSystem {
             writer.write(username + "," + password);
             writer.newLine();
             System.out.println("Rejestracja zakończona sukcesem!");
+            user=username;
             return true;
         } catch (IOException e) {
             System.out.println("Błąd!");
@@ -54,6 +56,7 @@ public class LoginSystem {
                 String[] credentials = line.split(",");
                 if (credentials[0].equals(username) && credentials[1].equals(password)) {
                     System.out.println("Logowanie zakończone sukcesem!");
+                    user=username;
                     return true;
                 }
             }
@@ -62,6 +65,13 @@ public class LoginSystem {
             e.printStackTrace();
         }
         System.out.println("Błędne dane! Spróbuj ponownie!");
+        return false;
+    }
+    public static boolean isAdmin() {
+        if (user.equalsIgnoreCase("admin")) {
+            System.out.println("admin");
+            return true;
+        }
         return false;
     }
 }
