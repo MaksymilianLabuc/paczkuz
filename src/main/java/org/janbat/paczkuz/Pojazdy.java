@@ -56,4 +56,5 @@ public class Pojazdy {
     public static ObservableList<Pojazd> getPojazdyObs() {
         return pojazdyObs;
     }
+
 }

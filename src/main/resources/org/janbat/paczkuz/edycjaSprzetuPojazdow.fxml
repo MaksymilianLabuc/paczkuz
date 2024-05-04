@@ -123,6 +123,49 @@
                   </VBox>
                </content>
           </Tab>
+            <Tab text="Trasy">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <FlowPane prefHeight="200.0" prefWidth="600.0">
+                           <children>
+                              <TableView fx:id="trasyTab" prefHeight="200.0" prefWidth="600.0">
+                                 <columns>
+                                    <TableColumn fx:id="trasaNazwaCol" prefWidth="200.0" text="Nazwa" />
+                                    <TableColumn fx:id="trasaPlacaCol" prefWidth="200.0" text="Płaca kierowcy" />
+                                    <TableColumn fx:id="trasaCenaCol" prefWidth="200.0" text="cena viatoll" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </FlowPane>
+                        <FlowPane prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="200.0" text="Nazwa" />
+                              <TextField fx:id="trasaNazwaTextField" prefHeight="50.0" prefWidth="400.0" />
+                           </children>
+                        </FlowPane>
+                        <FlowPane prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="200.0" text="Płaca kierowcy" />
+                              <TextField fx:id="trasaPlacaTextField" prefHeight="50.0" prefWidth="400.0" />
+                           </children>
+                        </FlowPane>
+                        <FlowPane prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="200.0" text="cena viatoll" />
+                              <TextField fx:id="trasaCenaTextField" prefHeight="50.0" prefWidth="400.0" />
+                           </children>
+                        </FlowPane>
+                        <FlowPane prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#zapiszTrasy" prefWidth="300.0" text="Dodaj/zapisz" />
+                              <Button mnemonicParsing="false" onAction="#usunTowar" prefWidth="300.0" text="Usuń" />
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
    </children>

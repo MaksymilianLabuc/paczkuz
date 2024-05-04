@@ -61,7 +61,7 @@
                         <FlowPane alignment="CENTER" hgap="10.0" prefHeight="30.0" prefWidth="600.0">
                            <children>
                               <Label text="Typ trasy" />
-                              <ChoiceBox prefWidth="150.0" />
+                              <ChoiceBox fx:id="trasyChoice" prefWidth="150.0" />
                            </children>
                         </FlowPane>
                         <FlowPane alignment="CENTER" hgap="10.0" prefHeight="30.0" prefWidth="600.0">
@@ -73,9 +73,9 @@
                         <FlowPane alignment="CENTER" hgap="10.0" prefHeight="30.0" prefWidth="600.0">
                            <children>
                               <Label text="Maksymalna ladownosc" />
-                              <Label text="[ladownosc]" />
+                              <Label fx:id="maxLadownoscLabel" text="[ladownosc]" />
                               <Label text="Pozostala ladownosc" />
-                              <Label text="[pozostala ladownosc]" />
+                              <Label fx:id="pozostalaLadownoscLabel" text="[pozostala ladownosc]" />
                            </children>
                         </FlowPane>
                         <HBox prefHeight="200.0" prefWidth="1107.0">

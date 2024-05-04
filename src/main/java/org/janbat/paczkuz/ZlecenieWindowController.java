@@ -13,12 +13,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ZlecenieWindowController {
     @FXML
-    private TableView<?> listaTowarowTab;
+    private TableView<Towar> listaTowarowTab;
     @FXML
-    private TableView<?> dodaneTowryTab;
+    private TableView<Towar> dodaneTowryTab;
     @FXML
     private TableColumn<Towar, String> ciezarColA;
 
@@ -41,18 +42,26 @@ public class ZlecenieWindowController {
     @FXML
     private ChoiceBox<String> pojazdyChoice;
     @FXML
+    private ChoiceBox<typTrasy> trasyChoice;
+    @FXML
     ListView<String> towaryListView;
     @FXML
     TextField cel;
     @FXML
     TextField start;
     @FXML
+    private Label maxLadownoscLabel;
+    @FXML
+    private Label pozostalaLadownoscLabel;
+    @FXML
     private Parent root;
 //    private ObservableList<Pojazd> pojazdyObs;
     private ObservableList<String> pojazdyObs;
     private MenuItem[] pojazdyItemy;
-    private ObservableList towary;
-    private ObservableList towaryWZleceniu;
+    private ObservableList<Towar> towary;
+    private ArrayList<Towar> towaryWZleceniuArrayList;
+    private ObservableList<Towar> towaryWZleceniu;
+    private ObservableList<typTrasy> typyTrasObs;
     private Zlecenie z;
     @FXML
     public void initialize(){
@@ -60,9 +69,12 @@ public class ZlecenieWindowController {
         Zlecenia.wczytaj();
         wczytajPojazdy();
         Towary.wczytaj();
+        typyTras.wczytaj();
+        wczytajTrasy();
         towary = Towary.getTowaryObs();
         z = new Zlecenie();
-        towaryWZleceniu = FXCollections.observableList(z.towary);
+        towaryWZleceniuArrayList = z.getTowary();
+        towaryWZleceniu = FXCollections.observableList(towaryWZleceniuArrayList);
 
         nazwaColA.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
         iloscColA.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
@@ -75,24 +87,50 @@ public class ZlecenieWindowController {
         listaTowarowTab.setItems(towary);
         dodaneTowryTab.setItems(towaryWZleceniu);
 
+        pojazdyChoice.setOnAction(event -> {
+            int selectedIndex = pojazdyChoice.getSelectionModel().getSelectedIndex();
+            Object selectedItem = pojazdyChoice.getSelectionModel().getSelectedItem();
+            z.setWybranyPojazd(Pojazdy.getPojazdyArrayList().get(selectedIndex));
+            maxLadownoscLabel.setText(String.valueOf(z.getWybranyPojazd().getLadownosc()));
+        });
     }
     public void dodajTowarDoZlecenia(){
+        if(z.getWybranyPojazd() == null){
+            Alert nieWybranoPojzdu = new Alert(Alert.AlertType.WARNING);
+            nieWybranoPojzdu.setTitle("Ostrzeżenie");
+            nieWybranoPojzdu.setContentText("Nie wybrano pojazdu!!!");
+            nieWybranoPojzdu.showAndWait();
+            return;
+        }
         int idx = listaTowarowTab.getSelectionModel().getSelectedIndex();
-        towaryWZleceniu.add(towary.get(idx));
+        if(z.getObjetoscCalkowita()+towary.get(idx).getCiezar() < z.getWybranyPojazd().getLadownosc()) {
+            towaryWZleceniu.add(towary.get(idx));
+            z.setObjetoscCalkowita(z.getObjetoscCalkowita()+towary.get(idx).getCiezar());
+            pozostalaLadownoscLabel.setText(String.valueOf(z.getWybranyPojazd().getLadownosc()-z.getObjetoscCalkowita()));
+        }
+        else{
+            Alert przekroczonaPojemnoscError = new Alert(Alert.AlertType.ERROR);
+            przekroczonaPojemnoscError.setTitle("Error");
+            przekroczonaPojemnoscError.setContentText("Przekroczono dostępną pojemność pojazdu!!!");
+            przekroczonaPojemnoscError.showAndWait();
+        }
     }
     public void zapisz(){
         Zlecenie z = new Zlecenie();
         z.cel = cel.getText();
         z.start = start.getText();
-        z.towary.add(Towary.getTowaryArrayList().get(0));
+        z.setTowary(towaryWZleceniuArrayList);
         Zlecenia.zapisz(z);
     }
-
     public void wczytajPojazdy(){
         pojazdyObs = FXCollections.observableArrayList();
         for(int i=0; i<Pojazdy.getPojazdyObs().size(); i++) pojazdyObs.add(Pojazdy.getPojazdyObs().get(i).getNazwa());
         pojazdyChoice.setItems(pojazdyObs);
 
+    }
+    public void wczytajTrasy(){
+        typyTrasObs = typyTras.trasyObsList;
+        trasyChoice.setItems(typyTrasObs);
     }
 
     @FXML

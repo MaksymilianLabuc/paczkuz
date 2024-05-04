@@ -23,6 +23,12 @@ public class edycjaSprzetuController {
     @FXML
     private TextField pojazdSpalanieField;
     @FXML
+    private TextField trasaPlacaTextField;
+    @FXML
+    private TextField trasaNazwaTextField;
+    @FXML
+    private TextField trasaCenaTextField;
+    @FXML
     TextArea nazwa;
     @FXML
     TextArea ciezar;
@@ -34,6 +40,14 @@ public class edycjaSprzetuController {
     TableView towaryTab;
     @FXML
     private TableView<?> pojazdTabela;
+    @FXML
+    private TableView<typTrasy> trasyTab;
+    @FXML
+    private TableColumn<typTrasy, Double> trasaCenaCol;
+    @FXML
+    private TableColumn<typTrasy, String> trasaNazwaCol;
+    @FXML
+    private TableColumn<typTrasy, Double> trasaPlacaCol;
     @FXML
     private TableColumn<Towar, String> colCiezar;
     @FXML
@@ -49,15 +63,18 @@ public class edycjaSprzetuController {
     //private ObservableList<Towar> dane = FXCollections.observableArrayList();
     private ObservableList<Towar> dane;
     private ObservableList pojazdy;
+    private ObservableList<typTrasy> trasy;
     @FXML
     public void initialize(){
         Towary.wczytaj();
         //wczytajTowary();
         Pojazdy.wczytaj();
+        typyTras.wczytaj();
+
         pojazdy = Pojazdy.getPojazdyObs();
-        //Towary.wczytaj();
-        //dane = Towary.getDane();
         dane = Towary.getTowaryObs();
+        trasy = typyTras.getTrasyObsList();
+
         colCiezar.setCellValueFactory(new PropertyValueFactory<>("ciezar"));
         colNazwa.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
         colilosc.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
@@ -66,12 +83,27 @@ public class edycjaSprzetuController {
         colPojazdLadownosc.setCellValueFactory(new PropertyValueFactory<>("ladownosc"));
         colPojazdSpalanie.setCellValueFactory(new PropertyValueFactory<>("spalanie"));
 
+        trasaCenaCol.setCellValueFactory(new PropertyValueFactory<>("cenaViatoll"));
+        trasaPlacaCol.setCellValueFactory(new PropertyValueFactory<>("wyplataDlaKierowcy"));
+        trasaNazwaCol.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
+
         towaryTab.setItems(dane);
         pojazdTabela.setItems(pojazdy);
+        trasyTab.setItems(trasy);
     }
 
     public void wczytajTowary(){
 
+    }
+    public void zapiszTrasy(){
+        typTrasy trasa = new typTrasy();
+        if(!trasaNazwaTextField.getText().trim().isEmpty() && !trasaPlacaTextField.getText().trim().isEmpty() && !trasaCenaTextField.getText().trim().isEmpty()){
+            trasa.setCenaViatoll(Double.parseDouble(trasaCenaTextField.getText()));
+            trasa.setWyplataDlaKierowcy(Double.parseDouble(trasaPlacaTextField.getText()));
+            trasa.setNazwa(trasaNazwaTextField.getText());
+            trasy.add(trasa);
+            typyTras.zapisz();
+        }
     }
 
     public void zapiszPojazd(){
