@@ -14,13 +14,13 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.janbat.paczkuz.edycjaSprzetuController">
+<VBox fx:id="root" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.janbat.paczkuz.edycjaSprzetuController">
    <children>
       <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Wroc" />
+              <MenuItem fx:id="wrocButton" mnemonicParsing="false" onAction="#switchToEdycjaZlecen" text="Wroc" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">

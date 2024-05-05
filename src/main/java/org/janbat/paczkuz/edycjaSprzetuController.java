@@ -4,18 +4,26 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class edycjaSprzetuController {
+    @FXML
+    private Parent root;
     @FXML
     private TextField ladownoscPojazdField;
     @FXML
@@ -144,6 +152,14 @@ public class edycjaSprzetuController {
     public void usunTowar(){
         int idx = towaryTab.getSelectionModel().getSelectedIndex();
         dane.remove(idx);
+    }
+    @FXML
+    public void switchToEdycjaZlecen(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"));
+        Stage stage = (Stage) root.getScene().getWindow();
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+        stage.show();
     }
 
 
