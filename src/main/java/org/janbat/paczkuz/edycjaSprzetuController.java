@@ -141,6 +141,11 @@ public class edycjaSprzetuController {
         t.setIlosc(Integer.parseInt(ilosc.getText()));
         Towary.zapisz(t);
     }
+    public void usunTrase(){
+        int idx = trasyTab.getSelectionModel().getSelectedIndex();
+        trasy.remove(idx);
+        typyTras.zapisz();
+    }
 
     public void usunPojazd(){
         System.out.println("usuwanie pojazdu");

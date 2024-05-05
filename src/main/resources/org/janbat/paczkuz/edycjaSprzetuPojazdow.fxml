@@ -159,7 +159,7 @@
                         <FlowPane prefHeight="50.0" prefWidth="200.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#zapiszTrasy" prefWidth="300.0" text="Dodaj/zapisz" />
-                              <Button mnemonicParsing="false" onAction="#usunTowar" prefWidth="300.0" text="Usuń" />
+                              <Button mnemonicParsing="false" onAction="#usunTrase" prefWidth="300.0" text="Usuń" />
                            </children>
                         </FlowPane>
                      </children>
