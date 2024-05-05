@@ -20,6 +20,19 @@ public class ZlecenieWindowController {
     private TableView<Towar> listaTowarowTab;
     @FXML
     private TableView<Towar> dodaneTowryTab;
+
+    @FXML
+    private TableView<Zlecenie> zapisaneTab;
+
+    @FXML
+    private TableColumn<Zlecenie, String> startZapisaneCol;
+    @FXML
+    private TableColumn<Zlecenie, String> celZapisaneCol;
+    @FXML
+    private TableColumn<Zlecenie, Double> dystansZapisaneCol;
+    @FXML
+    private TableColumn<Zlecenie, Double> cenaZapisaneCol;
+
     @FXML
     private TableColumn<Towar, String> ciezarColA;
 
@@ -62,6 +75,7 @@ public class ZlecenieWindowController {
     private ArrayList<Towar> towaryWZleceniuArrayList;
     private ObservableList<Towar> towaryWZleceniu;
     private ObservableList<typTrasy> typyTrasObs;
+    private ObservableList<Zlecenie> zleceniaObs;
     private Zlecenie z;
     @FXML
     public void initialize(){
@@ -75,6 +89,7 @@ public class ZlecenieWindowController {
         z = new Zlecenie();
         towaryWZleceniuArrayList = z.getTowary();
         towaryWZleceniu = FXCollections.observableList(towaryWZleceniuArrayList);
+        zleceniaObs = Zlecenia.getZleceniaObs();
 
         nazwaColA.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
         iloscColA.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
@@ -84,8 +99,14 @@ public class ZlecenieWindowController {
         iloscColB.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
         ciezarColB.setCellValueFactory(new PropertyValueFactory<>("ciezar"));
 
+        startZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("start"));
+        celZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("cel"));
+        dystansZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("dystans"));
+        cenaZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("cenaZaKm"));
+
         listaTowarowTab.setItems(towary);
         dodaneTowryTab.setItems(towaryWZleceniu);
+        zapisaneTab.setItems(zleceniaObs);
 
         pojazdyChoice.setOnAction(event -> {
             int selectedIndex = pojazdyChoice.getSelectionModel().getSelectedIndex();

@@ -10,10 +10,13 @@ public class Zlecenie {
     public double cenaZaKm;
     public double objetoscCalkowita;
     public ArrayList<Towar> towary;
+    public Double dystans;
 
 
     public Zlecenie(){
         towary = new ArrayList<Towar>();
+        this.start = "";
+        this.cel = "";
     }
 
     public String getStart() {
@@ -56,6 +59,14 @@ public class Zlecenie {
         this.cenaZaKm = cenaZaKm;
     }
 
+    public double getObjetoscCalkowita() {
+        return objetoscCalkowita;
+    }
+
+    public void setObjetoscCalkowita(double objetoscCalkowita) {
+        this.objetoscCalkowita = objetoscCalkowita;
+    }
+
     public ArrayList<Towar> getTowary() {
         return towary;
     }
@@ -64,11 +75,11 @@ public class Zlecenie {
         this.towary = towary;
     }
 
-    public double getObjetoscCalkowita() {
-        return objetoscCalkowita;
+    public Double getDystans() {
+        return dystans;
     }
 
-    public void setObjetoscCalkowita(double objetoscCalkowita) {
-        this.objetoscCalkowita = objetoscCalkowita;
+    public void setDystans(Double dystans) {
+        this.dystans = dystans;
     }
 }

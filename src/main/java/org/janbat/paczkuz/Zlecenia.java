@@ -19,6 +19,7 @@ public class Zlecenia {
         if(f.length() == 0 || !f.exists()){
             zleceniaArrayList = new ArrayList<Zlecenie>();
             zleceniaObs = FXCollections.observableList(zleceniaArrayList);
+            System.out.println("Zlecenia: "+zleceniaObs);
             return;
         }
         StringBuilder result = new StringBuilder();
@@ -36,6 +37,7 @@ public class Zlecenia {
         Type towarType = new TypeToken<ArrayList<Zlecenie>>(){}.getType();
         zleceniaArrayList = gson.fromJson(result.toString(), towarType);
         zleceniaObs = FXCollections.observableList(zleceniaArrayList);
+        System.out.println("Zlecenia: "+zleceniaObs);
     }
 
     public static void zapisz(Zlecenie z){
