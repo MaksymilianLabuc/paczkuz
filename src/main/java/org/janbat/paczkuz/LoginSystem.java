@@ -1,5 +1,7 @@
 package org.janbat.paczkuz;
 
+import javafx.scene.control.Alert;
+
 import java.io.*;
 import java.util.*;
 
@@ -67,11 +69,17 @@ public class LoginSystem {
         System.out.println("Błędne dane! Spróbuj ponownie!");
         return false;
     }
+    //Metoda sprawdzająca czy użytkownik jest administratorem, jeśli nie to wyrzuca alert
     public static boolean isAdmin() {
         if (user.equalsIgnoreCase("admin")) {
             System.out.println("admin");
             return true;
         }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("BŁĄD!");
+        alert.setHeaderText(null);
+        alert.setContentText("Nie jesteś adminem!");
+        alert.showAndWait();
         return false;
     }
 }

@@ -46,7 +46,7 @@
                               <TableView fx:id="pojazdTabela" prefHeight="200.0" prefWidth="600.0">
                                 <columns>
                                   <TableColumn fx:id="colPojazdNazwa" prefWidth="200.0" text="Nazwa" />
-                                  <TableColumn fx:id="colPojazdLadownosc" prefWidth="200.0" text="Ładowność" />
+                                  <TableColumn fx:id="colPojazdLadownosc" prefWidth="200.0" text="Ładowność (t)" />
                                     <TableColumn fx:id="colPojazdSpalanie" prefWidth="200.0" text="Spalanie (l/100km)" />
                                 </columns>
                               </TableView>
@@ -60,7 +60,7 @@
                         </FlowPane>
                         <FlowPane layoutX="10.0" layoutY="210.0" prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="18.0" prefWidth="200.0" text="Ładowność" />
+                              <Label prefHeight="18.0" prefWidth="200.0" text="Ładowność (t)" />
                               <TextField fx:id="ladownoscPojazdField" prefHeight="50.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>
@@ -89,7 +89,7 @@
                               <TableView fx:id="towaryTab" prefHeight="200.0" prefWidth="600.0">
                                  <columns>
                                     <TableColumn fx:id="colNazwa" prefWidth="200.0" text="Nazwa" />
-                                    <TableColumn fx:id="colCiezar" prefWidth="200.0" text="Ciężar" />
+                                    <TableColumn fx:id="colCiezar" prefWidth="200.0" text="Ciężar (t)" />
                                     <TableColumn fx:id="colilosc" prefWidth="200.0" text="Ilość" />
                                  </columns>
                               </TableView>
@@ -103,7 +103,7 @@
                         </FlowPane>
                         <FlowPane prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="18.0" prefWidth="200.0" text="Ciężar" />
+                              <Label prefHeight="18.0" prefWidth="200.0" text="Ciężar (t)" />
                               <TextArea fx:id="ciezar" prefHeight="50.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>

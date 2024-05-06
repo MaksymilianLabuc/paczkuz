@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.janbat.paczkuz.adminPanelController">
    <children>
       <MenuBar>
         <menus>
@@ -36,7 +36,7 @@
       </MenuBar>
       <FlowPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <TableView prefHeight="200.0" prefWidth="600.0">
+            <TableView fx:id="userTable" prefHeight="200.0" prefWidth="600.0">
               <columns>
                 <TableColumn prefWidth="300.0" text="Użytkownik" />
                 <TableColumn prefWidth="300.0" text="Haslo" />
