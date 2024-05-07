@@ -1,5 +1,5 @@
-teg,cos	
 tego,cos
 cos,tegi
 admin,admin
-ktos,123
+tegi,123
+tegi,cos
