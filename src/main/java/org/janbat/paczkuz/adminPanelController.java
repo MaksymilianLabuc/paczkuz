@@ -3,11 +3,14 @@ package org.janbat.paczkuz;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +44,15 @@ public class adminPanelController {
                 passwordField.setText(newSelection.getPassword());
             }
         });
-
         loadAccounts();
+       /* userTable.getScene().addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            Node source = (Node) event.getTarget();
+            if (!source.getStyleClass().contains("table-row-cell")) {
+                userTable.getSelectionModel().clearSelection();
+                usernameField.clear();
+                passwordField.clear();
+            }
+        });*/
     }
 
     private void loadAccounts() {
@@ -66,18 +76,23 @@ public class adminPanelController {
     @FXML
     private void handleAddSaveButtonAction() {
         Account selectedAccount = userTable.getSelectionModel().getSelectedItem();
-        if (selectedAccount != null) {
-            // Update existing account
+        if (selectedAccount != null && !(usernameField.getText().isEmpty())) {
+            // Zaaktualizuj obecne konto
             selectedAccount.setUsername(usernameField.getText());
             selectedAccount.setPassword(passwordField.getText());
-        } else {
-            // Add new account
-            Account newAccount = new Account(usernameField.getText(), passwordField.getText());
-            accounts.add(newAccount);
+        } else if (!(usernameField.getText().isEmpty())){
+            if (LoginSystem.userExists(usernameField.getText())) {
+                System.out.println("Taki user już istnieje, nie mozesz tego zrobić!");
+            }
+            else {
+                // Dodaj nowe konto
+                Account newAccount = new Account(usernameField.getText(), passwordField.getText());
+                accounts.add(newAccount);
+            }
         }
 
         saveAccounts();
-        loadAccounts();  // Refresh the table view
+        loadAccounts();  // Odśwież widok tabeli
     }
 
     @FXML

@@ -2,4 +2,3 @@ tego,cos
 cos,tegi
 admin,admin
 tegi,123
-tegi,cos
