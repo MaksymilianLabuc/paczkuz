@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.janbat.paczkuz.adminPanelController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.janbat.paczkuz.adminPanelController">
    <children>
       <MenuBar>
         <menus>
@@ -38,28 +28,28 @@
          <children>
             <TableView fx:id="userTable" prefHeight="200.0" prefWidth="600.0">
               <columns>
-                <TableColumn prefWidth="300.0" fx:id="usernameColumn" text="Użytkownik" />
-                <TableColumn prefWidth="300.0" fx:id="passwordColumn" text="Haslo" />
+                <TableColumn fx:id="usernameColumn" prefWidth="300.0" text="%uzytkownik" />
+                <TableColumn fx:id="passwordColumn" prefWidth="300.0" text="%haslo" />
               </columns>
             </TableView>
          </children>
       </FlowPane>
       <FlowPane prefHeight="75.0" prefWidth="200.0">
          <children>
-            <Label prefHeight="18.0" prefWidth="200.0" text="Login" />
-            <TextField prefHeight="75.0" fx:id="usernameField" prefWidth="400.0" />
+            <Label prefHeight="18.0" prefWidth="200.0" text="%login" />
+            <TextField fx:id="usernameField" prefHeight="75.0" prefWidth="400.0" />
          </children>
       </FlowPane>
       <FlowPane prefHeight="75.0" prefWidth="200.0">
          <children>
-            <Label prefWidth="200.0" text="Hasło" />
-            <PasswordField prefHeight="75.0" fx:id="passwordField" prefWidth="400.0" />
+            <Label prefWidth="200.0" text="%haslo" />
+            <PasswordField fx:id="passwordField" prefHeight="75.0" prefWidth="400.0" />
          </children>
       </FlowPane>
       <FlowPane prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" prefWidth="300.0" text="Dodaj/zapisz" onAction="#handleAddSaveButtonAction" />
-            <Button mnemonicParsing="false" prefWidth="300.0" text="Usuń" onAction="#handleDeleteButtonAction"/>
+            <Button mnemonicParsing="false" onAction="#handleAddSaveButtonAction" prefWidth="300.0" text="%dodaj_zapisz" />
+            <Button mnemonicParsing="false" onAction="#handleDeleteButtonAction" prefWidth="300.0" text="%usun" />
          </children>
       </FlowPane>
    </children>
