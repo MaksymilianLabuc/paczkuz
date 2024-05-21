@@ -156,7 +156,7 @@ public class edycjaSprzetuController {
 
     public void usunTowar(){
         int idx = towaryTab.getSelectionModel().getSelectedIndex();
-        dane.remove(idx);
+        Towary.usun(idx);
     }
     @FXML
     public void switchToEdycjaZlecen(ActionEvent event) throws IOException {

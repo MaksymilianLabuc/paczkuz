@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Towary {
-    public static ArrayList<Towar> towaryArrayList;
+    public static ArrayList<Towar> towaryArrayList = new ArrayList<>();
     public static ObservableList<Towar> towaryObs;
 
     public static void wczytaj(){
@@ -51,10 +51,19 @@ public class Towary {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Here");
     }
     public static void usun(int idx){
         towaryObs.remove(idx);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Type towarType = new TypeToken<ArrayList<Towar>>(){}.getType();
+        String json = gson.toJson(towaryArrayList,towarType);
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("towary.json"));
+            writer.write(json);
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static ArrayList<Towar> getTowaryArrayList() {

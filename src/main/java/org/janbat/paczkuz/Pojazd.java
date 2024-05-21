@@ -28,4 +28,9 @@ public class Pojazd {
     public void setSpalanie(double spalanie) {
         this.spalanie = spalanie;
     }
+
+    @Override
+    public String toString() {
+        return nazwa;
+    }
 }
