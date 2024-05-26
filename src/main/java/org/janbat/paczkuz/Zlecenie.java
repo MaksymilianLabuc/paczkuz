@@ -1,8 +1,12 @@
 package org.janbat.paczkuz;
 
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
+import java.util.Queue;
 
 public class Zlecenie {
+    public int id;
     public String start;
     public String cel;
     public Pojazd wybranyPojazd;
@@ -13,10 +17,12 @@ public class Zlecenie {
     public Double dystans;
 
 
-    public Zlecenie(){
+    public Zlecenie(ObservableList<Zlecenie> zleceniaObs){
         towary = new ArrayList<Towar>();
         this.start = "";
         this.cel = "";
+        if(zleceniaObs.isEmpty() == false) this.id = zleceniaObs.getLast().getId()+1;
+        else this.id = 0;
     }
 
     public String getStart() {
@@ -81,5 +87,13 @@ public class Zlecenie {
 
     public void setDystans(Double dystans) {
         this.dystans = dystans;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

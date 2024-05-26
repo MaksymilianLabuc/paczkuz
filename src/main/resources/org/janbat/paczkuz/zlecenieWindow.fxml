@@ -26,7 +26,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+      <TabPane fx:id="zakladki" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
         <tabs>
           <Tab text="%zlecenie">
                <content>
@@ -117,7 +117,7 @@
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <TableView fx:id="zapisaneTab" prefHeight="200.0" prefWidth="200.0">
+                        <TableView fx:id="zapisaneTab" prefHeight="471.0" prefWidth="1107.0">
                           <columns>
                             <TableColumn fx:id="startZapisaneCol" prefWidth="75.0" text="%start" />
                             <TableColumn fx:id="celZapisaneCol" prefWidth="75.0" text="%cel" />
@@ -128,6 +128,14 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
+                        <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="58.0" prefWidth="1107.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#wczytajZapisaneZlecenie" text="Wczytaj" />
+                              <Button mnemonicParsing="false" onAction="#usunZapisaneZlecenie" text="Usun" />
+                              <Button mnemonicParsing="false" text="Wyślij maila" />
+                              <Button mnemonicParsing="false" text="opłać" />
+                           </children>
+                        </FlowPane>
                      </children></VBox>
                </content></Tab>
         </tabs>

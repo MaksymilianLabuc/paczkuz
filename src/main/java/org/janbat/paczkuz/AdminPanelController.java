@@ -1,7 +1,7 @@
 package org.janbat.paczkuz;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
@@ -15,7 +15,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class adminPanelController {
+public class AdminPanelController {
 
     @FXML
     private TableView<Account> userTable;
@@ -45,14 +45,20 @@ public class adminPanelController {
             }
         });
         loadAccounts();
-       /* userTable.getScene().addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            Node source = (Node) event.getTarget();
-            if (!source.getStyleClass().contains("table-row-cell")) {
+        Platform.runLater(() -> {
+            userTable.getScene().addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+                Node source = (Node) event.getTarget();
+                while (source != userTable && source != null) {
+                    if (source.getStyleClass().contains("table-row-cell") || source.getStyleClass().contains("table-cell")) {
+                        return;
+                    }
+                    source = source.getParent();
+                }
                 userTable.getSelectionModel().clearSelection();
                 usernameField.clear();
                 passwordField.clear();
-            }
-        });*/
+            });
+        });
     }
 
     private void loadAccounts() {

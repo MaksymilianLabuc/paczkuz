@@ -14,10 +14,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.Collection;
 
 public class ZlecenieWindowController {
+    @FXML
+    private TabPane zakladki;
     @FXML
     private TableView<Towar> listaTowarowTab;
     @FXML
@@ -55,7 +56,7 @@ public class ZlecenieWindowController {
     private TableColumn<Towar, Integer> nazwaColB;
 
     @FXML
-    private ChoiceBox<String> pojazdyChoice;
+    private ChoiceBox<Pojazd> pojazdyChoice;
     @FXML
     private ChoiceBox<typTrasy> trasyChoice;
     @FXML
@@ -71,7 +72,7 @@ public class ZlecenieWindowController {
     @FXML
     private Parent root;
 //    private ObservableList<Pojazd> pojazdyObs;
-    private ObservableList<String> pojazdyObs;
+    private ObservableList<Pojazd> pojazdyObs;
     private MenuItem[] pojazdyItemy;
     private ObservableList<Towar> towary;
     private ArrayList<Towar> towaryWZleceniuArrayList;
@@ -88,10 +89,10 @@ public class ZlecenieWindowController {
         typyTras.wczytaj();
         wczytajTrasy();
         towary = Towary.getTowaryObs();
-        z = new Zlecenie();
+        zleceniaObs = Zlecenia.getZleceniaObs();
+        z = new Zlecenie(zleceniaObs);
         towaryWZleceniuArrayList = z.getTowary();
         towaryWZleceniu = FXCollections.observableList(towaryWZleceniuArrayList);
-        zleceniaObs = Zlecenia.getZleceniaObs();
 
         nazwaColA.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
         iloscColA.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
@@ -113,9 +114,32 @@ public class ZlecenieWindowController {
         pojazdyChoice.setOnAction(event -> {
             int selectedIndex = pojazdyChoice.getSelectionModel().getSelectedIndex();
             Object selectedItem = pojazdyChoice.getSelectionModel().getSelectedItem();
-            z.setWybranyPojazd(Pojazdy.getPojazdyArrayList().get(selectedIndex));
+            z.setWybranyPojazd(pojazdyChoice.getSelectionModel().getSelectedItem());
             maxLadownoscLabel.setText(String.valueOf(z.getWybranyPojazd().getLadownosc()));
         });
+    }
+    public void wczytajZapisaneZlecenie(){
+        // Pobiera index wiersza wybranego w tabeli który reprezentuje zlecenie i wcztyje jego wartości do
+        // odpowiednich pól w zakładce edycji zleceń
+        int idx = zapisaneTab.getSelectionModel().getSelectedIndex();
+        if(zapisaneTab.getSelectionModel().getSelectedItem() == z) return;
+        z = zleceniaObs.get(idx);
+        start.setText(z.getStart());
+        cel.setText(z.getCel());
+        trasyChoice.getSelectionModel().select(z.getWybranyTypTrasy());
+        pojazdyChoice.getSelectionModel().select(z.getWybranyPojazd());
+        maxLadownoscLabel.setText(String.valueOf(z.getWybranyPojazd().getLadownosc()));
+        towaryWZleceniu.addAll(z.getTowary());
+        //Automatycznie przełącza użytkownika do zakłądki edycji zleceń
+        zakladki.getSelectionModel().select(0);
+    }
+    public void usunZapisaneZlecenie(){
+        int idx = zapisaneTab.getSelectionModel().getSelectedIndex();
+        Zlecenia.usun(idx);
+    }
+    public void usunTowarZzlecenia(){
+        int idx = dodaneTowryTab.getSelectionModel().getSelectedIndex();
+        towaryWZleceniu.remove(idx);
     }
     public void dodajTowarDoZlecenia(){
         if(z.getWybranyPojazd() == null){
@@ -139,15 +163,32 @@ public class ZlecenieWindowController {
         }
     }
     public void zapisz(){
-        Zlecenie z = new Zlecenie();
+        //Zlecenie z = new Zlecenie();
+        Boolean isnieje = false;
+        for(int i=0; i<zleceniaObs.size(); i++){
+            if(z.id == zleceniaObs.get(i).getId()){
+                isnieje = true;
+            }
+        }
         z.cel = cel.getText();
         z.start = start.getText();
         z.setTowary(towaryWZleceniuArrayList);
-        Zlecenia.zapisz(z);
+        z.setWybranyPojazd(pojazdyChoice.getSelectionModel().getSelectedItem());
+        z.setWybranyTypTrasy(trasyChoice.getSelectionModel().getSelectedItem());
+        if(!isnieje){
+            Zlecenia.zapisz(z);
+        } else if (isnieje) {
+            int idx = 0;
+            for(int i=0; i<zleceniaObs.size(); i++){
+                if(zleceniaObs.get(i).getId() == z.getId()) idx = zleceniaObs.get(i).getId();
+            }
+            zleceniaObs.set(idx,z);
+        }
+
     }
     public void wczytajPojazdy(){
         pojazdyObs = FXCollections.observableArrayList();
-        for(int i=0; i<Pojazdy.getPojazdyObs().size(); i++) pojazdyObs.add(Pojazdy.getPojazdyObs().get(i).getNazwa());
+        for(int i=0; i<Pojazdy.getPojazdyObs().size(); i++) pojazdyObs.add(Pojazdy.getPojazdyObs().get(i));
         pojazdyChoice.setItems(pojazdyObs);
 
     }
