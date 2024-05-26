@@ -10,12 +10,11 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class HelloApplication extends Application {
+    public static ResourceBundle paczkaJezykowa = ResourceBundle.getBundle("org.janbat.paczkuz.language", Locale.getDefault());
+
     @Override
     public void start(Stage stage) throws IOException {
-        Locale currentLocale = Locale.getDefault();
-        Locale locale = new Locale("jp", "JP");
-        ResourceBundle bundle = ResourceBundle.getBundle("org.janbat.paczkuz.language", locale);
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"), bundle);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"), paczkaJezykowa);
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hello!");
         stage.setScene(scene);

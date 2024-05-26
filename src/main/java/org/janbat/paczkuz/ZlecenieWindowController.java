@@ -79,14 +79,8 @@ public class ZlecenieWindowController {
     private ObservableList<typTrasy> typyTrasObs;
     private ObservableList<Zlecenie> zleceniaObs;
     private Zlecenie z;
-    private ResourceBundle bundle;
     @FXML
     public void initialize(){
-        // Ladowanie paczki z tlumaczeniami
-        // Musi byc dodana przy ladowaniu plikow fxml
-        Locale locale = new Locale("jp", "JP");
-        bundle = ResourceBundle.getBundle("org.janbat.paczkuz.language", locale);
-
         Pojazdy.wczytaj();
         Zlecenia.wczytaj();
         wczytajPojazdy();
@@ -164,7 +158,7 @@ public class ZlecenieWindowController {
 
     @FXML
     public void switchToLoginWindow(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"), bundle);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"), HelloApplication.paczkaJezykowa);
         Stage stage = (Stage) root.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
@@ -172,7 +166,7 @@ public class ZlecenieWindowController {
     }
     @FXML
     public void switchToEdycjaTowarow(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("edycjaSprzetuPojazdow.fxml"), bundle);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("edycjaSprzetuPojazdow.fxml"), HelloApplication.paczkaJezykowa);
         Stage stage = (Stage) root.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
@@ -181,7 +175,7 @@ public class ZlecenieWindowController {
     @FXML
     public void switchToAdminPanel(ActionEvent event) throws IOException {
         if (LoginSystem.isAdmin()) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("adminPanel.fxml"), bundle);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("adminPanel.fxml"), HelloApplication.paczkaJezykowa);
             Stage stage = (Stage) root.getScene().getWindow();
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);

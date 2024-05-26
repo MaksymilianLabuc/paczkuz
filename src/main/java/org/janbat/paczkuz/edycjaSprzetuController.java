@@ -160,7 +160,7 @@ public class edycjaSprzetuController {
     }
     @FXML
     public void switchToEdycjaZlecen(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"), HelloApplication.paczkaJezykowa);
         Stage stage = (Stage) root.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
