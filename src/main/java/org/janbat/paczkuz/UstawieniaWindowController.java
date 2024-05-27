@@ -26,7 +26,8 @@ public class UstawieniaWindowController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"));
         Stage stage = (Stage) root.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load());
-        if(MotywChoiceBox.getValue().equals("Dark mode")){
+        Ustawienia.setMotyw(MotywChoiceBox.getValue());
+        if(Ustawienia.getMotyw().equals("Dark mode")){
             File cssFile = new File("src/main/resources/dark-mode.css");
             scene.getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
         }

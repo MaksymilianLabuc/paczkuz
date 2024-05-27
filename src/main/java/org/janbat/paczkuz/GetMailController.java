@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 public class GetMailController {
@@ -38,6 +39,10 @@ public class GetMailController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"));
         Stage stage = (Stage) root.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load());
+        if (Ustawienia.getMotyw().equals("Dark mode")){
+            File cssFile = new File("src/main/resources/dark-mode.css");
+            scene.getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
+        }
         stage.setScene(scene);
         stage.show();
     }
