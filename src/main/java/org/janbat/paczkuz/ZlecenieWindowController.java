@@ -224,6 +224,16 @@ public class ZlecenieWindowController {
         }
     }
     @FXML
+    public void switchToUstawienia(ActionEvent event) throws IOException {
+        if (LoginSystem.isAdmin()) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ustawienia.fxml"));
+            Stage stage = (Stage) root.getScene().getWindow();
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+            stage.show();
+        }
+    }
+    @FXML
     public void menuClick(ActionEvent event){
         System.out.println("HERE");
     }

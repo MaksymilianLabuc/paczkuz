@@ -29,6 +29,7 @@
             <items>
                 <MenuItem mnemonicParsing="false" onAction="#switchToEdycjaTowarow" text="Edytuj" />
                 <MenuItem mnemonicParsing="false" onAction="#switchToAdminPanel" text="Admin" />
+                  <MenuItem mnemonicParsing="false" onAction="#switchToUstawienia" text="Ustawienia" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

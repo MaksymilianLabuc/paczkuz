@@ -16,8 +16,8 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        /*File cssFile = new File("src/main/resources/dark-mode.css");
-        scene.getStylesheets().add(cssFile.toURI().toString());*/ //zmiana na tryb ciemny
+//        File cssFile = new File("src/main/resources/dark-mode.css");
+//        scene.getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
 
         stage.setTitle("Hello!");
         stage.setScene(scene);
