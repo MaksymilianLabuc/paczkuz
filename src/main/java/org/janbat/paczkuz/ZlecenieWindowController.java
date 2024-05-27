@@ -118,6 +118,28 @@ public class ZlecenieWindowController {
             maxLadownoscLabel.setText(String.valueOf(z.getWybranyPojazd().getLadownosc()));
         });
     }
+
+    public void sendMail(ActionEvent event) throws IOException {
+        int idx = zapisaneTab.getSelectionModel().getSelectedIndex();
+        if(zapisaneTab.getSelectionModel().getSelectedItem() == z) return;
+        z = zleceniaObs.get(idx);
+        System.out.println(z);
+        String title = "Potwierdzenie zlecenia";
+        String towars = "";
+        for (Towar t: z.towary) {
+            towars += ("\t" + t.ilosc + "x " + t.nazwa + ", " + t.ciezar + "\n");
+        }
+        String body = "Start: " + z.start + " Cel: " + z.cel + "\n" + towars;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("get-mail.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(fxmlLoader.load());
+        GetMailController gmc = fxmlLoader.<GetMailController>getController();
+        gmc.setMailTitle(title);
+        gmc.setMailBody(body);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void wczytajZapisaneZlecenie(){
         // Pobiera index wiersza wybranego w tabeli który reprezentuje zlecenie i wcztyje jego wartości do
         // odpowiednich pól w zakładce edycji zleceń

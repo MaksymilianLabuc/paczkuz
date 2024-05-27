@@ -19,7 +19,7 @@ public class HelloApplication extends Application {
 //        File cssFile = new File("src/main/resources/dark-mode.css");
 //        scene.getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
 
-        stage.setTitle("Hello!");
+        stage.setTitle("PaczkUZ");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
