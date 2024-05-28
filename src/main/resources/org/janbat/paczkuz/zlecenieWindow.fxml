@@ -17,6 +17,7 @@
             <items>
                 <MenuItem mnemonicParsing="false" onAction="#switchToEdycjaTowarow" text="Edytuj" />
                 <MenuItem mnemonicParsing="false" onAction="#switchToAdminPanel" text="Admin" />
+                  <MenuItem mnemonicParsing="false" onAction="#switchToUstawienia" text="Ustawienia" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -132,7 +133,7 @@
                            <children>
                               <Button mnemonicParsing="false" onAction="#wczytajZapisaneZlecenie" text="Wczytaj" />
                               <Button mnemonicParsing="false" onAction="#usunZapisaneZlecenie" text="Usun" />
-                              <Button mnemonicParsing="false" text="Wyślij maila" />
+                              <Button mnemonicParsing="false" onAction="#sendMail" text="Wyślij maila" />
                               <Button mnemonicParsing="false" text="opłać" />
                            </children>
                         </FlowPane>

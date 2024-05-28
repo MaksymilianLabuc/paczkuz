@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -45,6 +46,10 @@ public class LoginWindowController {
              FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"), HelloApplication.paczkaJezykowa);
              Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
              Scene scene = new Scene(fxmlLoader.load());
+             if (Ustawienia.getMotyw().equals("Dark mode")){
+                 File cssFile = new File("src/main/resources/dark-mode.css");
+                 scene.getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
+             }
              stage.setScene(scene);
              stage.show();
          }
@@ -56,6 +61,10 @@ public class LoginWindowController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"), HelloApplication.paczkaJezykowa);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(fxmlLoader.load());
+            if (Ustawienia.getMotyw().equals("Dark mode")){
+                File cssFile = new File("src/main/resources/dark-mode.css");
+                scene.getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
+            }
             stage.setScene(scene);
             stage.show();
         }

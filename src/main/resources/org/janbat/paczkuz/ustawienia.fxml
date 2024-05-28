@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="233.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.janbat.paczkuz.UstawieniaWindowController">
+   <children>
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="48.0" prefWidth="233.0">
+         <children>
+            <Label text="Motyw">
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <ChoiceBox fx:id="MotywChoiceBox" prefWidth="150.0" />
+         </children>
+      </FlowPane>
+      <FlowPane alignment="CENTER" layoutX="10.0" layoutY="151.0" prefHeight="48.0" prefWidth="233.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#switchToLoginWindow" text="Zapisz" />
+         </children></FlowPane>
+   </children>
+</VBox>

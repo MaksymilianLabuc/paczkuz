@@ -16,7 +16,11 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"), paczkaJezykowa);
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+
+//        File cssFile = new File("src/main/resources/dark-mode.css");
+//        scene.getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
+
+        stage.setTitle("PaczkUZ");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
