@@ -222,7 +222,7 @@ public class ZlecenieWindowController {
 
     @FXML
     public void switchToLoginWindow(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"), HelloApplication.paczkaJezykowa);
         Stage stage = (Stage) root.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load());
         if (Ustawienia.getMotyw().equals("Dark mode")){
@@ -234,7 +234,7 @@ public class ZlecenieWindowController {
     }
     @FXML
     public void switchToEdycjaTowarow(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("edycjaSprzetuPojazdow.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("edycjaSprzetuPojazdow.fxml"), HelloApplication.paczkaJezykowa);
         Stage stage = (Stage) root.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load());
         if (Ustawienia.getMotyw().equals("Dark mode")){
@@ -247,7 +247,7 @@ public class ZlecenieWindowController {
     @FXML
     public void switchToAdminPanel(ActionEvent event) throws IOException {
         if (LoginSystem.isAdmin()) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("adminPanel.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("adminPanel.fxml"), HelloApplication.paczkaJezykowa);
             Stage stage = (Stage) root.getScene().getWindow();
             Scene scene = new Scene(fxmlLoader.load());
             if (Ustawienia.getMotyw().equals("Dark mode")){

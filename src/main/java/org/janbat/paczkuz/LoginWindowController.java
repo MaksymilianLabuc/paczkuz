@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class LoginWindowController {
     @FXML
@@ -41,7 +43,7 @@ public class LoginWindowController {
     }*/
     public void login(ActionEvent event) throws IOException {
          if (LoginSystem.login(TextArea1.getText(),PasswordField1.getText())) {
-             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"));
+             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"), HelloApplication.paczkaJezykowa);
              Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
              Scene scene = new Scene(fxmlLoader.load());
              if (Ustawienia.getMotyw().equals("Dark mode")){
@@ -56,7 +58,7 @@ public class LoginWindowController {
 
     public void register(ActionEvent event) throws IOException {
         if (LoginSystem.register(TextArea1.getText(),PasswordField1.getText())) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"), HelloApplication.paczkaJezykowa);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(fxmlLoader.load());
             if (Ustawienia.getMotyw().equals("Dark mode")){
