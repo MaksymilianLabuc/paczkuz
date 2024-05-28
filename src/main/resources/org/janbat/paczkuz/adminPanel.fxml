@@ -27,29 +27,28 @@
          <children>
             <TableView fx:id="userTable" prefHeight="200.0" prefWidth="600.0">
               <columns>
-                <TableColumn fx:id="usernameColumn" prefWidth="300.0" text="%uzytkownik" />
-                <TableColumn fx:id="passwordColumn" prefWidth="300.0" text="%haslo" />
+                <TableColumn fx:id="usernameColumn" prefWidth="300.0" text="Użytkownik" />
+                <TableColumn fx:id="passwordColumn" prefWidth="300.0" text="Haslo" />
               </columns>
             </TableView>
          </children>
       </FlowPane>
       <FlowPane prefHeight="75.0" prefWidth="200.0">
          <children>
-            <Label prefHeight="18.0" prefWidth="200.0" text="%login" />
+            <Label prefHeight="18.0" prefWidth="200.0" text="Login" />
             <TextField fx:id="usernameField" prefHeight="75.0" prefWidth="400.0" />
          </children>
       </FlowPane>
       <FlowPane prefHeight="75.0" prefWidth="200.0">
          <children>
-            <Label prefWidth="200.0" text="%haslo" />
+            <Label prefWidth="200.0" text="Hasło" />
             <PasswordField fx:id="passwordField" prefHeight="75.0" prefWidth="400.0" />
          </children>
       </FlowPane>
       <FlowPane prefHeight="50.0" prefWidth="200.0">
          <children>
-
-            <Button mnemonicParsing="false" onAction="#handleAddSaveButtonAction" prefWidth="300.0" text="%dodaj_zapisz" />
-            <Button mnemonicParsing="false" onAction="#handleDeleteButtonAction" prefWidth="300.0" text="%usun" />
+            <Button mnemonicParsing="false" onAction="#handleAddSaveButtonAction" prefWidth="300.0" text="Dodaj/zapisz" />
+            <Button mnemonicParsing="false" onAction="#handleDeleteButtonAction" prefWidth="300.0" text="Usuń" />
          </children>
       </FlowPane>
    </children>

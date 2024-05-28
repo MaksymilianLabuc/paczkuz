@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.janbat.paczkuz.edycjaSprzetuController">
+<VBox fx:id="root" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.janbat.paczkuz.edycjaSprzetuController">
    <children>
       <MenuBar>
         <menus>
@@ -26,7 +37,7 @@
       </MenuBar>
       <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="%pojazdy">
+          <Tab text="Pojazdy">
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -34,42 +45,42 @@
                            <children>
                               <TableView fx:id="pojazdTabela" prefHeight="200.0" prefWidth="600.0">
                                 <columns>
-                                  <TableColumn fx:id="colPojazdNazwa" prefWidth="200.0" text="%nazwa" />
-                                  <TableColumn fx:id="colPojazdLadownosc" prefWidth="200.0" text="%ladownosc_t" />
-                                    <TableColumn fx:id="colPojazdSpalanie" prefWidth="200.0" text="%spalanie_litr_na_100_km" />
+                                  <TableColumn fx:id="colPojazdNazwa" prefWidth="200.0" text="Nazwa" />
+                                  <TableColumn fx:id="colPojazdLadownosc" prefWidth="200.0" text="Ładowność (t)" />
+                                    <TableColumn fx:id="colPojazdSpalanie" prefWidth="200.0" text="Spalanie (l/100km)" />
                                 </columns>
                               </TableView>
                            </children>
                         </FlowPane>
                         <FlowPane prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="18.0" prefWidth="200.0" text="%nazwa" />
+                              <Label prefHeight="18.0" prefWidth="200.0" text="Nazwa" />
                               <TextField fx:id="pojazdNazwaFIeld" prefHeight="50.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>
                         <FlowPane layoutX="10.0" layoutY="210.0" prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="18.0" prefWidth="200.0" text="%ladownosc_t" />
+                              <Label prefHeight="18.0" prefWidth="200.0" text="Ładowność (t)" />
                               <TextField fx:id="ladownoscPojazdField" prefHeight="50.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>
                         <FlowPane layoutX="10.0" layoutY="260.0" prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="18.0" prefWidth="200.0" text="%spalanie_litr_na_100_km" />
+                              <Label prefHeight="18.0" prefWidth="200.0" text="Spalanie (l/100km)" />
                               <TextField fx:id="pojazdSpalanieField" prefHeight="50.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>
                         <FlowPane layoutX="10.0" layoutY="311.0" prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#zapiszPojazd" prefWidth="300.0" text="%dodaj_zapisz" />
-                              <Button mnemonicParsing="false" onAction="#usunPojazd" prefWidth="300.0" text="%usun" />
+                              <Button mnemonicParsing="false" onAction="#zapiszPojazd" prefWidth="300.0" text="Dodaj/zapisz" />
+                              <Button mnemonicParsing="false" onAction="#usunPojazd" prefWidth="300.0" text="Usuń" />
                            </children>
                         </FlowPane>
                      </children>
                   </VBox>
                </content>
           </Tab>
-          <Tab text="%towary">
+          <Tab text="Towary">
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -77,42 +88,42 @@
                            <children>
                               <TableView fx:id="towaryTab" prefHeight="200.0" prefWidth="600.0">
                                  <columns>
-                                    <TableColumn fx:id="colNazwa" prefWidth="200.0" text="%nazwa" />
-                                    <TableColumn fx:id="colCiezar" prefWidth="200.0" text="%ciezar_t" />
-                                    <TableColumn fx:id="colilosc" prefWidth="200.0" text="%ilosc" />
+                                    <TableColumn fx:id="colNazwa" prefWidth="200.0" text="Nazwa" />
+                                    <TableColumn fx:id="colCiezar" prefWidth="200.0" text="Ciężar (t)" />
+                                    <TableColumn fx:id="colilosc" prefWidth="200.0" text="Ilość" />
                                  </columns>
                               </TableView>
                            </children>
                         </FlowPane>
                         <FlowPane prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="18.0" prefWidth="200.0" text="%nazwa" />
+                              <Label prefHeight="18.0" prefWidth="200.0" text="Nazwa" />
                               <TextArea fx:id="nazwa" prefHeight="50.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>
                         <FlowPane prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="18.0" prefWidth="200.0" text="%ciezar_t" />
+                              <Label prefHeight="18.0" prefWidth="200.0" text="Ciężar (t)" />
                               <TextArea fx:id="ciezar" prefHeight="50.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>
                         <FlowPane prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="18.0" prefWidth="200.0" text="%ilosc" />
+                              <Label prefHeight="18.0" prefWidth="200.0" text="Ilość" />
                               <TextArea fx:id="ilosc" prefHeight="50.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>
                         <FlowPane prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#zapiszTowar" prefWidth="300.0" text="%dodaj_zapisz" />
-                              <Button mnemonicParsing="false" onAction="#usunTowar" prefWidth="300.0" text="%usun" />
+                              <Button mnemonicParsing="false" onAction="#zapiszTowar" prefWidth="300.0" text="Dodaj/zapisz" />
+                              <Button mnemonicParsing="false" onAction="#usunTowar" prefWidth="300.0" text="Usuń" />
                            </children>
                         </FlowPane>
                      </children>
                   </VBox>
                </content>
           </Tab>
-            <Tab text="%trasy">
+            <Tab text="Trasy">
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -120,35 +131,35 @@
                            <children>
                               <TableView fx:id="trasyTab" prefHeight="200.0" prefWidth="600.0">
                                  <columns>
-                                    <TableColumn fx:id="trasaNazwaCol" prefWidth="200.0" text="%nazwa" />
-                                    <TableColumn fx:id="trasaPlacaCol" prefWidth="200.0" text="%placa_kierowcy" />
-                                    <TableColumn fx:id="trasaCenaCol" prefWidth="200.0" text="%cena_viatoll" />
+                                    <TableColumn fx:id="trasaNazwaCol" prefWidth="200.0" text="Nazwa" />
+                                    <TableColumn fx:id="trasaPlacaCol" prefWidth="200.0" text="Płaca kierowcy" />
+                                    <TableColumn fx:id="trasaCenaCol" prefWidth="200.0" text="cena viatoll" />
                                  </columns>
                               </TableView>
                            </children>
                         </FlowPane>
                         <FlowPane prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="18.0" prefWidth="200.0" text="%nazwa" />
+                              <Label prefHeight="18.0" prefWidth="200.0" text="Nazwa" />
                               <TextField fx:id="trasaNazwaTextField" prefHeight="50.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>
                         <FlowPane prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="18.0" prefWidth="200.0" text="%placa_kierowcy" />
+                              <Label prefHeight="18.0" prefWidth="200.0" text="Płaca kierowcy" />
                               <TextField fx:id="trasaPlacaTextField" prefHeight="50.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>
                         <FlowPane prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <Label prefHeight="18.0" prefWidth="200.0" text="%cena_viatoll" />
+                              <Label prefHeight="18.0" prefWidth="200.0" text="cena viatoll" />
                               <TextField fx:id="trasaCenaTextField" prefHeight="50.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>
                         <FlowPane prefHeight="50.0" prefWidth="200.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#zapiszTrasy" prefWidth="300.0" text="%dodaj_zapisz" />
-                              <Button mnemonicParsing="false" onAction="#usunTrase" prefWidth="300.0" text="%usun" />
+                              <Button mnemonicParsing="false" onAction="#zapiszTrasy" prefWidth="300.0" text="Dodaj/zapisz" />
+                              <Button mnemonicParsing="false" onAction="#usunTrase" prefWidth="300.0" text="Usuń" />
                            </children>
                         </FlowPane>
                      </children>
