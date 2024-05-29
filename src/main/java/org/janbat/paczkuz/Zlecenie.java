@@ -15,6 +15,7 @@ public class Zlecenie {
     public double objetoscCalkowita;
     public ArrayList<Towar> towary;
     public Double dystans;
+    public Double cenaCalkowita;
 
 
     public Zlecenie(ObservableList<Zlecenie> zleceniaObs){
@@ -95,5 +96,13 @@ public class Zlecenie {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Double getCenaCalkowita() {
+        return cenaCalkowita;
+    }
+
+    public void setCenaCalkowita(Double cenaCalkowita) {
+        this.cenaCalkowita = cenaCalkowita;
     }
 }

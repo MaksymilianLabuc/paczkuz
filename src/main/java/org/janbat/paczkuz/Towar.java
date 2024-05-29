@@ -3,12 +3,12 @@ package org.janbat.paczkuz;
 public class Towar {
     public String nazwa;
     public int ciezar;
-    public int ilosc;
+    //public int ilosc;
 
     public Towar(String n, int c, int i){
         nazwa = n;
         ciezar = c;
-        ilosc = i;
+        //ilosc = i;
     }
     public Towar(){}
     public String getNazwa() {
@@ -27,12 +27,12 @@ public class Towar {
         this.ciezar = ciezar;
     }
 
-    public int getIlosc() {
-        return ilosc;
-    }
+//    public int getIlosc() {
+//        return ilosc;
+//    }
 
-    public void setIlosc(int ilosc) {
-        this.ilosc = ilosc;
-    }
+//    public void setIlosc(int ilosc) {
+//        this.ilosc = ilosc;
+//    }
 
 }
