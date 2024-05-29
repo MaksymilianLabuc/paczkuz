@@ -36,7 +36,7 @@ public class GetMailController {
      * @throws IOException
      */
     public void switchToZlecenieWindow(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"), HelloApplication.paczkaJezykowa);
         Stage stage = (Stage) root.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load());
         if (Ustawienia.getMotyw().equals("Dark mode")){

@@ -134,7 +134,7 @@ public class AdminPanelController {
     // Przełącz na okno "Zlecenia"
     @FXML
     public void switchToZlecenia(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"), HelloApplication.paczkaJezykowa);
         Stage stage = (Stage) root.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load());
         if (Ustawienia.getMotyw().equals("Dark mode")){
