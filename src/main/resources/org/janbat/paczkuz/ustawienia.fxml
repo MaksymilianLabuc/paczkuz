@@ -19,6 +19,16 @@
             <ChoiceBox fx:id="MotywChoiceBox" prefWidth="150.0" />
          </children>
       </FlowPane>
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="48.0" prefWidth="233.0">
+         <children>
+            <Label text="Język">
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </Label>
+            <ChoiceBox fx:id="jezykChoiceBox" prefWidth="150.0" />
+         </children>
+      </FlowPane>
       <FlowPane alignment="CENTER" layoutX="10.0" layoutY="151.0" prefHeight="48.0" prefWidth="233.0">
          <children>
             <Button mnemonicParsing="false" onAction="#switchToLoginWindow" text="Zapisz" />
