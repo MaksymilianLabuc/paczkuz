@@ -52,11 +52,11 @@ public class PodsumowanieWindowController {
 
         celLabel.setText(z.getCel());
         startLabel.setText(z.getStart());
-        cenaKmLabel.setText(String.valueOf(z.getCenaZaKm()));
+        cenaKmLabel.setText(String.format("%.2f",z.getCenaZaKm()));
         dystansLabel.setText(String.valueOf(z.getDystans()));
         idLabel.setText(String.valueOf(z.getId()));
         pojazdLabel.setText(z.getWybranyPojazd().getNazwa());
-        sumaLabel.setText(String.valueOf(z.getCenaCalkowita()));
+        sumaLabel.setText(String.format("%.2f",z.getCenaCalkowita()));
         typTrasyLabel.setText(z.getWybranyTypTrasy().getNazwa());
     }
     public PodsumowanieWindowController(Zlecenie z){

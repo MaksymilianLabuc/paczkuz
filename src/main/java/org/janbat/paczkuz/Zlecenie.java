@@ -1,5 +1,6 @@
 package org.janbat.paczkuz;
 
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
@@ -16,12 +17,14 @@ public class Zlecenie {
     public ArrayList<Towar> towary;
     public Double dystans;
     public Double cenaCalkowita;
+    public String oplacone;
 
 
     public Zlecenie(ObservableList<Zlecenie> zleceniaObs){
         towary = new ArrayList<Towar>();
         this.start = "";
         this.cel = "";
+        this.oplacone = "NIE";
         if(zleceniaObs.isEmpty() == false) this.id = zleceniaObs.getLast().getId()+1;
         else this.id = 0;
     }
@@ -104,5 +107,13 @@ public class Zlecenie {
 
     public void setCenaCalkowita(Double cenaCalkowita) {
         this.cenaCalkowita = cenaCalkowita;
+    }
+
+    public String getOplacone() {
+        return oplacone;
+    }
+
+    public void setOplacone(String oplacone) {
+        this.oplacone = oplacone;
     }
 }

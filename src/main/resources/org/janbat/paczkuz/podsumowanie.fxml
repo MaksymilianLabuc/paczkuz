@@ -22,15 +22,15 @@
       <RowConstraints maxHeight="451.0" minHeight="10.0" prefHeight="92.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label alignment="CENTER" text="Podsumowanie" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+      <Label alignment="CENTER" text="%podsumowanie" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
          <font>
             <Font size="39.0" />
          </font>
       </Label>
       <TableView fx:id="towaryTab" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
         <columns>
-          <TableColumn fx:id="nazwaCol" prefWidth="75.0" text="Nazwa" />
-          <TableColumn fx:id="wagaCol" prefWidth="75.0" text="Waga" />
+          <TableColumn fx:id="nazwaCol" prefWidth="75.0" text="%nazwa" />
+          <TableColumn fx:id="wagaCol" prefWidth="75.0" text="%ciezar" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -53,32 +53,32 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="ID">
+            <Label text="%id">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label text="Start" GridPane.rowIndex="1">
+            <Label text="%start" GridPane.rowIndex="1">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label text="Cel" GridPane.rowIndex="2">
+            <Label text="%cel" GridPane.rowIndex="2">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label text="Pojazd" GridPane.columnIndex="2">
+            <Label text="%pojazd" GridPane.columnIndex="2">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label text="Typ trasy" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Label text="%typ_trasy" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label text="Dystans" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Label text="%dystans" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <font>
                   <Font size="17.0" />
                </font>
@@ -100,7 +100,7 @@
       </GridPane>
       <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
-            <Label text="Suma:">
+            <Label text="%suma">
                <font>
                   <Font size="25.0" />
                </font>
@@ -117,7 +117,7 @@
       </FlowPane>
       <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
-            <Label text="Cena/km:">
+            <Label text="%cenaPer100km">
                <font>
                   <Font size="25.0" />
                </font>

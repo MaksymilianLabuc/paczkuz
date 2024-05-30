@@ -37,6 +37,8 @@ public class ZlecenieWindowController {
     private TableColumn<Zlecenie, Double> dystansZapisaneCol;
     @FXML
     private TableColumn<Zlecenie, Double> cenaZapisaneCol;
+    @FXML
+    private TableColumn<Zlecenie,String> oplaconeZapisaneCol;
 
     @FXML
     private TableColumn<Towar, String> ciezarColA;
@@ -108,6 +110,7 @@ public class ZlecenieWindowController {
         celZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("cel"));
         dystansZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("dystans"));
         cenaZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("cenaZaKm"));
+        oplaconeZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("oplacone"));
 
         listaTowarowTab.setItems(towary);
         dodaneTowryTab.setItems(towaryWZleceniu);
@@ -128,15 +131,20 @@ public class ZlecenieWindowController {
         int MT = 12; // Maksymalny czas pracy kierowcy na dzień ( w godzinach )
         Double P = z.getWybranyTypTrasy().getWyplataDlaKierowcy(); // Stawka godzinowa kierowcy
         Double Kk = (Double.valueOf(D)/90.0) * P; // Płaca dla kierowcy
-        Double Kp = S * C; // Koszt paliwa
-        Double Kc = Kk+Kp; // koszt całkowity
+        Double Kp = (S * C) * (D/100); // Koszt paliwa
+        Double Kc = Kk+Kp+z.getWybranyTypTrasy().getCenaViatoll(); // koszt całkowity
         Double Kkm = Kc/D; // koszt za kilometr
         z.setCenaZaKm(Kkm);
         z.setCenaCalkowita(Kc);
         z.setDystans(D);
         switchToPodsumowanie();
-
-
+    }
+    public void oplacZlecenie(){
+        int idx = zapisaneTab.getSelectionModel().getSelectedIndex();
+        Zlecenie tmp = zleceniaObs.get(idx);
+        tmp.setOplacone("TAK");
+        zleceniaObs.set(idx,tmp);
+        Zlecenia.zapiszWszystkie();
     }
 
     public void sendMail(ActionEvent event) throws IOException {
@@ -150,7 +158,7 @@ public class ZlecenieWindowController {
             towars += ("\t" + "x " + t.nazwa + ", " + t.ciezar + "\n");
         }
         String body = "Start: " + z.start + " Cel: " + z.cel + "\n" + towars;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("get-mail.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("get-mail.fxml"),HelloApplication.paczkaJezykowa);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load());
         GetMailController gmc = fxmlLoader.<GetMailController>getController();
@@ -280,7 +288,7 @@ public class ZlecenieWindowController {
     @FXML
     public void switchToUstawienia(ActionEvent event) throws IOException {
         if (LoginSystem.isAdmin()) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ustawienia.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ustawienia.fxml"),HelloApplication.paczkaJezykowa);
             Stage stage = (Stage) root.getScene().getWindow();
             Scene scene = new Scene(fxmlLoader.load());
             if (Ustawienia.getMotyw().equals("Dark mode")){
@@ -306,6 +314,7 @@ public class ZlecenieWindowController {
             scene.getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
         }
         podsumowanie.setTitle("Podsumowanie");
+        podsumowanie.setResizable(false);
         podsumowanie.setScene(scene);
         podsumowanie.showAndWait();
     }

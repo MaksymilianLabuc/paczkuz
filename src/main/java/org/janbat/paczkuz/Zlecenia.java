@@ -53,6 +53,18 @@ public class Zlecenia {
             throw new RuntimeException(e);
         }
     }
+    public static void zapiszWszystkie(){
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Type towarType = new TypeToken<ArrayList<Zlecenie>>(){}.getType();
+        String json = gson.toJson(zleceniaArrayList,towarType);
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("zlecenia.json"));
+            writer.write(json);
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public static void usun(int idx){
         //Przyjmuje index zlecenia do usunięcia i zapisuje zaktualizowany plik
         Zlecenia.getZleceniaObs().remove(idx);

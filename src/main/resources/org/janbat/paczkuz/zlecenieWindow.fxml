@@ -136,6 +136,7 @@
                             <TableColumn fx:id="celZapisaneCol" prefWidth="75.0" text="%cel" />
                               <TableColumn fx:id="dystansZapisaneCol" prefWidth="75.0" text="%dystans" />
                               <TableColumn fx:id="cenaZapisaneCol" prefWidth="75.0" text="%cena" />
+                              <TableColumn fx:id="oplaconeZapisaneCol" prefWidth="75.0" text="%oplacone" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -143,10 +144,10 @@
                         </TableView>
                         <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="58.0" prefWidth="1107.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#wczytajZapisaneZlecenie" text="Wczytaj" />
-                              <Button mnemonicParsing="false" onAction="#usunZapisaneZlecenie" text="Usun" />
-                              <Button mnemonicParsing="false" onAction="#sendMail" text="Wyślij maila" />
-                              <Button mnemonicParsing="false" text="opłać" />
+                              <Button mnemonicParsing="false" onAction="#wczytajZapisaneZlecenie" text="%wczytaj" />
+                              <Button mnemonicParsing="false" onAction="#usunZapisaneZlecenie" text="%usun" />
+                              <Button mnemonicParsing="false" onAction="#sendMail" text="%mail" />
+                              <Button mnemonicParsing="false" onAction="#oplacZlecenie" text="%oplac" />
                            </children>
                         </FlowPane>
                      </children></VBox>
