@@ -11,7 +11,7 @@
    <children>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="48.0" prefWidth="233.0">
          <children>
-            <Label text="Motyw">
+            <Label text="%motyw">
                <padding>
                   <Insets right="10.0" />
                </padding>
@@ -21,7 +21,7 @@
       </FlowPane>
       <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="48.0" prefWidth="233.0">
          <children>
-            <Label text="Język">
+            <Label text="%jezyk">
                <padding>
                   <Insets right="10.0" />
                </padding>
@@ -31,7 +31,7 @@
       </FlowPane>
       <FlowPane alignment="CENTER" layoutX="10.0" layoutY="151.0" prefHeight="48.0" prefWidth="233.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#switchToLoginWindow" text="Zapisz" />
+            <Button mnemonicParsing="false" onAction="#switchToLoginWindow" text="%zapisz" />
          </children></FlowPane>
    </children>
 </VBox>

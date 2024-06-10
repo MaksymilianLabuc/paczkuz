@@ -3,7 +3,7 @@ package org.janbat.paczkuz;
 public class Towar {
     public String nazwa;
     public int ciezar;
-    public int ilosc;
+    //public int ilosc;
 
     /**
      * Konstruktor tworzący obiekt klasy Towar.
@@ -14,7 +14,7 @@ public class Towar {
     public Towar(String n, int c, int i){
         nazwa = n;
         ciezar = c;
-        ilosc = i;
+        //ilosc = i;
     }
 
     /**
@@ -54,20 +54,22 @@ public class Towar {
         this.ciezar = ciezar;
     }
 
-    /**
+
+      /**
      * Zwraca ilość towaru.
      * @return ilość towaru.
      */
-    public int getIlosc() {
-        return ilosc;
-    }
+//    public int getIlosc() {
+//        return ilosc;
+//    }
 
-    /**
+      /**
      * Ustawia ilość towaru.
      * @param ilosc nowa ilość towaru.
      */
-    public void setIlosc(int ilosc) {
-        this.ilosc = ilosc;
-    }
+//    public void setIlosc(int ilosc) {
+//        this.ilosc = ilosc;
+//    }
+
 
 }

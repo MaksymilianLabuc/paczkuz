@@ -60,8 +60,8 @@ public class edycjaSprzetuController {
     private TableColumn<Towar, String> colCiezar;
     @FXML
     private TableColumn<Towar, Integer> colNazwa;
-    @FXML
-    private TableColumn<Towar, Integer> colilosc;
+//    @FXML
+//    private TableColumn<Towar, Integer> colilosc;
     @FXML
     private TableColumn<Pojazd, Double> colPojazdLadownosc;
     @FXML
@@ -89,7 +89,7 @@ public class edycjaSprzetuController {
 
         colCiezar.setCellValueFactory(new PropertyValueFactory<>("ciezar"));
         colNazwa.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
-        colilosc.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
+//        colilosc.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
 
         colPojazdNazwa.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
         colPojazdLadownosc.setCellValueFactory(new PropertyValueFactory<>("ladownosc"));
@@ -148,14 +148,14 @@ public class edycjaSprzetuController {
      * Jeśli pola nazwa, ciężar i ilość są wypełnione, towar jest dodawany do listy i zapisywany.
      */
     public void zapiszTowar(){
-        if(nazwa.getText().trim().isEmpty() || ciezar.getText().trim().isEmpty() || ilosc.getText().trim().isEmpty()){
+        if(nazwa.getText().trim().isEmpty() || ciezar.getText().trim().isEmpty()){
             System.out.println("Zadne pole nie moze byc puste!");
             return;
         }
         Towar t = new Towar();
         t.setNazwa(nazwa.getText());
         t.setCiezar(Integer.parseInt(ciezar.getText()));
-        t.setIlosc(Integer.parseInt(ilosc.getText()));
+        //t.setIlosc(Integer.parseInt(ilosc.getText()));
         Towary.zapisz(t);
     }
 

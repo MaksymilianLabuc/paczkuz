@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -36,6 +37,8 @@ public class ZlecenieWindowController {
     private TableColumn<Zlecenie, Double> dystansZapisaneCol;
     @FXML
     private TableColumn<Zlecenie, Double> cenaZapisaneCol;
+    @FXML
+    private TableColumn<Zlecenie,String> oplaconeZapisaneCol;
 
     @FXML
     private TableColumn<Towar, String> ciezarColA;
@@ -43,11 +46,11 @@ public class ZlecenieWindowController {
     @FXML
     private TableColumn<Towar, String> ciezarColB;
 
-    @FXML
-    private TableColumn<Towar, Integer> iloscColA;
+//    @FXML
+//    private TableColumn<Towar, Integer> iloscColA;
 
-    @FXML
-    private TableColumn<Towar, Integer> iloscColB;
+//    @FXML
+//    private TableColumn<Towar, Integer> iloscColB;
 
 
     @FXML
@@ -101,17 +104,18 @@ public class ZlecenieWindowController {
         towaryWZleceniu = FXCollections.observableList(towaryWZleceniuArrayList);
 
         nazwaColA.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
-        iloscColA.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
+//        iloscColA.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
         ciezarColA.setCellValueFactory(new PropertyValueFactory<>("ciezar"));
 
         nazwaColB.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
-        iloscColB.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
+//        iloscColB.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
         ciezarColB.setCellValueFactory(new PropertyValueFactory<>("ciezar"));
 
         startZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("start"));
         celZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("cel"));
         dystansZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("dystans"));
         cenaZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("cenaZaKm"));
+        oplaconeZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("oplacone"));
 
         listaTowarowTab.setItems(towary);
         dodaneTowryTab.setItems(towaryWZleceniu);
@@ -124,6 +128,29 @@ public class ZlecenieWindowController {
             z.setWybranyPojazd(pojazdyChoice.getSelectionModel().getSelectedItem());
             maxLadownoscLabel.setText(String.valueOf(z.getWybranyPojazd().getLadownosc()));
         });
+    }
+    @FXML
+    public void oblicz() throws IOException {
+        Double D = Double.valueOf(API.getDistanceOfTowns(z.getStart(),z.getCel())) / 1000; // Dystans między miastem startowym a docelowym
+        Double S = z.getWybranyPojazd().getSpalanie(); // Spalanie na 100km
+        Double C = 7.0; // Cena paliwa za litr
+        int MT = 12; // Maksymalny czas pracy kierowcy na dzień ( w godzinach )
+        Double P = z.getWybranyTypTrasy().getWyplataDlaKierowcy(); // Stawka godzinowa kierowcy
+        Double Kk = (Double.valueOf(D)/90.0) * P; // Płaca dla kierowcy
+        Double Kp = (S * C) * (D/100); // Koszt paliwa
+        Double Kc = Kk+Kp+z.getWybranyTypTrasy().getCenaViatoll(); // koszt całkowity
+        Double Kkm = Kc/D; // koszt za kilometr
+        z.setCenaZaKm(Kkm);
+        z.setCenaCalkowita(Kc);
+        z.setDystans(D);
+        switchToPodsumowanie();
+    }
+    public void oplacZlecenie(){
+        int idx = zapisaneTab.getSelectionModel().getSelectedIndex();
+        Zlecenie tmp = zleceniaObs.get(idx);
+        tmp.setOplacone("TAK");
+        zleceniaObs.set(idx,tmp);
+        Zlecenia.zapiszWszystkie();
     }
 
     /**
@@ -146,12 +173,12 @@ public class ZlecenieWindowController {
         String title = "Potwierdzenie zlecenia";
         String towars = "";
         for (Towar t: z.towary) {
-            towars += ("\t" + t.ilosc + "x " + t.nazwa + ", " + t.ciezar + "\n");
+            towars += ("\t" + "x " + t.nazwa + ", " + t.ciezar + "\n");
         }
         String body = "Start: " + z.start + " Cel: " + z.cel + "\n" + towars;
 
         // Ładowanie widoku do wysyłania maila
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("get-mail.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("get-mail.fxml"),HelloApplication.paczkaJezykowa);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load());
 
@@ -361,7 +388,7 @@ public class ZlecenieWindowController {
     @FXML
     public void switchToUstawienia(ActionEvent event) throws IOException {
         if (LoginSystem.isAdmin()) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ustawienia.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ustawienia.fxml"),HelloApplication.paczkaJezykowa);
             Stage stage = (Stage) root.getScene().getWindow();
             Scene scene = new Scene(fxmlLoader.load());
             if (Ustawienia.getMotyw().equals("Dark mode")){
@@ -373,10 +400,32 @@ public class ZlecenieWindowController {
         }
     }
 
+    public void switchToPodsumowanie() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("podsumowanie.fxml"), HelloApplication.paczkaJezykowa);
+        Stage podsumowanie = new Stage();
+        //Parent roott = (Parent) fxmlLoader.load();
+        podsumowanie.initModality(Modality.APPLICATION_MODAL);
+        Stage PrimaryStage = (Stage) root.getScene().getWindow();
+        podsumowanie.initOwner(PrimaryStage);
+        PodsumowanieWindowController controller = new PodsumowanieWindowController(z);
+        fxmlLoader.setController(controller);
+        Scene scene = new Scene(fxmlLoader.load());
+        if (Ustawienia.getMotyw().equals("Dark mode")){
+            File cssFile = new File("src/main/resources/dark-mode.css");
+            scene.getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
+        }
+        podsumowanie.setTitle("Podsumowanie");
+        podsumowanie.setResizable(false);
+        podsumowanie.setScene(scene);
+        podsumowanie.showAndWait();
+    }
+
+
     /**
      * Obsługuje zdarzenie kliknięcia na menu.
      * @param event Zdarzenie akcji, np. kliknięcie w menu.
      */
+
     @FXML
     public void menuClick(ActionEvent event){
         System.out.println("HERE");
