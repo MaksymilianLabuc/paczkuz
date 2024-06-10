@@ -82,6 +82,24 @@ public class ZlecenieWindowController {
     private ObservableList<Zlecenie> zleceniaObs;
     private Zlecenie z;
 
+    public void setAttrsForTests() {
+        this.pojazdyChoice = new ChoiceBox<>(FXCollections.observableArrayList());
+        this.trasyChoice = new ChoiceBox<>(FXCollections.observableArrayList());
+        this.nazwaColA = new TableColumn<>();
+        this.nazwaColB = new TableColumn<>();
+        this.iloscColA = new TableColumn<>();
+        this.iloscColB = new TableColumn<>();
+        this.ciezarColA = new TableColumn<>();
+        this.ciezarColB = new TableColumn<>();
+        this.startZapisaneCol = new TableColumn<>();
+        this.celZapisaneCol = new TableColumn<>();
+        this.dystansZapisaneCol = new TableColumn<>();
+        this.cenaZapisaneCol = new TableColumn<>();
+        this.listaTowarowTab = new TableView<>();
+        this.dodaneTowryTab = new TableView<>();
+        this.zapisaneTab = new TableView<>();
+    }
+
     /**
      * Inicjalizuje widok zlecenia przez wczytanie danych, konfigurację tabeli oraz ustawienie obsługi wyboru pojazdów.
      */
