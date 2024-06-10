@@ -13,6 +13,9 @@ public class Pojazdy {
     private static ArrayList<Pojazd> pojazdyArrayList = new ArrayList<>();
     private static ObservableList<Pojazd> pojazdyObs;
 
+    /**
+     * Ładuje listę pojazdów z pliku JSON. Jeśli plik jest pusty, inicjalizuje pustą listę.
+     */
     public static void wczytaj(){
         File f = new File("pojazdy.json");
         if(f.length()==0){
@@ -35,6 +38,9 @@ public class Pojazdy {
         pojazdyObs = FXCollections.observableList(pojazdyArrayList);
     }
 
+    /**
+     * Zapisuje listę pojazdów do pliku JSON.
+     */
     public static void zapisz(){
         System.out.println("zapisywanie pojazdu");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -49,10 +55,18 @@ public class Pojazdy {
         }
     }
 
+    /**
+     * Zwraca listę pojazdów jako ArrayList.
+     * @return lista pojazdów.
+     */
     public static ArrayList<Pojazd> getPojazdyArrayList() {
         return pojazdyArrayList;
     }
 
+    /**
+     * Zwraca listę pojazdów jako ObservableList.
+     * @return obserwowalna lista pojazdów.
+     */
     public static ObservableList<Pojazd> getPojazdyObs() {
         return pojazdyObs;
     }

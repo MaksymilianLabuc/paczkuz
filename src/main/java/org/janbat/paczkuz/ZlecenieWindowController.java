@@ -84,8 +84,13 @@ public class ZlecenieWindowController {
     private ObservableList<typTrasy> typyTrasObs;
     private ObservableList<Zlecenie> zleceniaObs;
     private Zlecenie z;
+
+    /**
+     * Inicjalizuje widok zlecenia przez wczytanie danych, konfigurację tabeli oraz ustawienie obsługi wyboru pojazdów.
+     */
     @FXML
     public void initialize(){
+        // Wczytanie danych
         Pojazdy.wczytaj();
         Zlecenia.wczytaj();
         wczytajPojazdy();
@@ -116,6 +121,7 @@ public class ZlecenieWindowController {
         dodaneTowryTab.setItems(towaryWZleceniu);
         zapisaneTab.setItems(zleceniaObs);
 
+        // Obsługa wyboru pojazdu
         pojazdyChoice.setOnAction(event -> {
             int selectedIndex = pojazdyChoice.getSelectionModel().getSelectedIndex();
             Object selectedItem = pojazdyChoice.getSelectionModel().getSelectedItem();
@@ -147,51 +153,99 @@ public class ZlecenieWindowController {
         Zlecenia.zapiszWszystkie();
     }
 
+    /**
+     * Otwiera okno wysyłania maila z potwierdzeniem zlecenia.
+     * @param event Obiekt zdarzenia akcji.
+     * @throws IOException Występuje, gdy nie można załadować pliku FXML okna wysyłania maila.
+     */
     public void sendMail(ActionEvent event) throws IOException {
+        // Pobranie indeksu zaznaczonego zlecenia
         int idx = zapisaneTab.getSelectionModel().getSelectedIndex();
+
+        // Sprawdzenie, czy zlecenie zostało wybrane
         if(zapisaneTab.getSelectionModel().getSelectedItem() == z) return;
+
+        // Przypisanie zaznaczonego zlecenia
         z = zleceniaObs.get(idx);
         System.out.println(z);
+
+        // Tworzenie tytułu i treści maila z potwierdzeniem zlecenia
         String title = "Potwierdzenie zlecenia";
         String towars = "";
         for (Towar t: z.towary) {
             towars += ("\t" + "x " + t.nazwa + ", " + t.ciezar + "\n");
         }
         String body = "Start: " + z.start + " Cel: " + z.cel + "\n" + towars;
+
+        // Ładowanie widoku do wysyłania maila
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("get-mail.fxml"),HelloApplication.paczkaJezykowa);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load());
+
+        // Ustawienie tytułu i treści maila w kontrolerze okna wysyłania maila
         GetMailController gmc = fxmlLoader.<GetMailController>getController();
         gmc.setMailTitle(title);
         gmc.setMailBody(body);
+
+        // Ustawienie sceny i wyświetlenie okna wysyłania maila
         stage.setScene(scene);
         stage.show();
     }
 
+    /**
+     * Wczytuje zaznaczone zlecenie i przypisuje jego wartości do odpowiednich pól w zakładce edycji zleceń.
+     * Jeśli żadne zlecenie nie jest zaznaczone lub zlecenie zapisane jest już wczytane, to metoda nie wykonuje operacji.
+     */
     public void wczytajZapisaneZlecenie(){
-        // Pobiera index wiersza wybranego w tabeli który reprezentuje zlecenie i wcztyje jego wartości do
-        // odpowiednich pól w zakładce edycji zleceń
+        // Pobiera indeks zaznaczonego wiersza reprezentującego zlecenie
         int idx = zapisaneTab.getSelectionModel().getSelectedIndex();
+
+        // Sprawdza, czy zlecenie zostało zaznaczone i czy nie jest już wczytane
         if(zapisaneTab.getSelectionModel().getSelectedItem() == z) return;
+
+        // Przypisanie zaznaczonego zlecenia
         z = zleceniaObs.get(idx);
+
+        // Wypełnienie pól startu, celu, typu trasy i pojazdu z wczytanymi wartościami zlecenia
         start.setText(z.getStart());
         cel.setText(z.getCel());
         trasyChoice.getSelectionModel().select(z.getWybranyTypTrasy());
         pojazdyChoice.getSelectionModel().select(z.getWybranyPojazd());
+
+        // Ustawienie maksymalnej ładowności pojazdu jako tekst
         maxLadownoscLabel.setText(String.valueOf(z.getWybranyPojazd().getLadownosc()));
+
+        // Dodanie towarów ze zlecenia do listy towarów w zleceniu
         towaryWZleceniu.addAll(z.getTowary());
-        //Automatycznie przełącza użytkownika do zakłądki edycji zleceń
+
+        //Automatycznie przełącza użytkownika do zakładki edycji zleceń
         zakladki.getSelectionModel().select(0);
     }
+
+    /**
+     * Usuwa zaznaczone zlecenie z listy zapisanych zleceń.
+     */
     public void usunZapisaneZlecenie(){
         int idx = zapisaneTab.getSelectionModel().getSelectedIndex();
         Zlecenia.usun(idx);
     }
+
+    /**
+     * Usuwa zaznaczony towar z aktualnego zlecenia.
+     */
     public void usunTowarZzlecenia(){
         int idx = dodaneTowryTab.getSelectionModel().getSelectedIndex();
         towaryWZleceniu.remove(idx);
     }
+
+    /**
+     * Dodaje wybrany towar do aktualnego zlecenia.
+     * Jeśli żaden pojazd nie jest wybrany, wyświetla ostrzeżenie.
+     * Jeśli wybrany towar przekracza dostępną pojemność pojazdu, wyświetla błąd.
+     * Jeśli żaden towar nie jest wybrany, metoda nie wykonuje operacji.
+     */
     public void dodajTowarDoZlecenia(){
+        // Sprawdza, czy został wybrany pojazd
         if(z.getWybranyPojazd() == null){
             Alert nieWybranoPojzdu = new Alert(Alert.AlertType.WARNING);
             nieWybranoPojzdu.setTitle("Ostrzeżenie");
@@ -199,32 +253,49 @@ public class ZlecenieWindowController {
             nieWybranoPojzdu.showAndWait();
             return;
         }
+        // Pobiera indeks zaznaczonego wiersza reprezentującego towar
         int idx = listaTowarowTab.getSelectionModel().getSelectedIndex();
+
+        // Sprawdza, czy został wybrany towar
         if(z.getObjetoscCalkowita()+towary.get(idx).getCiezar() < z.getWybranyPojazd().getLadownosc()) {
             towaryWZleceniu.add(towary.get(idx));
             z.setObjetoscCalkowita(z.getObjetoscCalkowita()+towary.get(idx).getCiezar());
             pozostalaLadownoscLabel.setText(String.valueOf(z.getWybranyPojazd().getLadownosc()-z.getObjetoscCalkowita()));
         }
         else{
+            // Wyświetla komunikat o przekroczeniu dostępnej pojemności pojazdu
             Alert przekroczonaPojemnoscError = new Alert(Alert.AlertType.ERROR);
             przekroczonaPojemnoscError.setTitle("Error");
             przekroczonaPojemnoscError.setContentText("Przekroczono dostępną pojemność pojazdu!!!");
             przekroczonaPojemnoscError.showAndWait();
         }
     }
+
+    /**
+     * Zapisuje aktualne zlecenie.
+     * Sprawdza, czy zlecenie już istnieje w liście zleceń.
+     * Jeśli zlecenie nie istnieje, dodaje je do listy zleceń.
+     * Jeśli zlecenie istnieje, aktualizuje jego dane w liście zleceń.
+     */
     public void zapisz(){
         //Zlecenie z = new Zlecenie();
+
+        // Sprawdza, czy zlecenie już istnieje w liście zleceń
         Boolean isnieje = false;
         for(int i=0; i<zleceniaObs.size(); i++){
             if(z.id == zleceniaObs.get(i).getId()){
                 isnieje = true;
             }
         }
+        // Aktualizuje dane zlecenia
         z.cel = cel.getText();
         z.start = start.getText();
         z.setTowary(towaryWZleceniuArrayList);
         z.setWybranyPojazd(pojazdyChoice.getSelectionModel().getSelectedItem());
         z.setWybranyTypTrasy(trasyChoice.getSelectionModel().getSelectedItem());
+
+        // Jeśli zlecenie nie istnieje, dodaje je do listy zleceń
+        // Jeśli zlecenie istnieje, aktualizuje jego dane w liście zleceń
         if(!isnieje){
             Zlecenia.zapisz(z);
         } else if (isnieje) {
@@ -234,19 +305,30 @@ public class ZlecenieWindowController {
             }
             zleceniaObs.set(idx,z);
         }
-
     }
+
+    /**
+     * Wczytuje listę pojazdów i ustawia ją jako dane źródłowe dla wyboru pojazdów.
+     */
     public void wczytajPojazdy(){
         pojazdyObs = FXCollections.observableArrayList();
         for(int i=0; i<Pojazdy.getPojazdyObs().size(); i++) pojazdyObs.add(Pojazdy.getPojazdyObs().get(i));
         pojazdyChoice.setItems(pojazdyObs);
-
     }
+
+    /**
+     * Wczytuje listę dostępnych tras i ustawia je jako dane źródłowe dla wyboru tras.
+     */
     public void wczytajTrasy(){
         typyTrasObs = typyTras.trasyObsList;
         trasyChoice.setItems(typyTrasObs);
     }
 
+    /**
+     * Przełącza interfejs użytkownika na okno logowania.
+     * @param event Zdarzenie akcji, np. kliknięcie przycisku.
+     * @throws IOException Wyjątek rzucany, gdy wystąpi błąd podczas ładowania pliku FXML.
+     */
     @FXML
     public void switchToLoginWindow(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"), HelloApplication.paczkaJezykowa);
@@ -259,6 +341,12 @@ public class ZlecenieWindowController {
         stage.setScene(scene);
         stage.show();
     }
+
+    /**
+     * Przełącza interfejs użytkownika na okno edycji sprzętu pojazdów.
+     * @param event Zdarzenie akcji, np. kliknięcie przycisku.
+     * @throws IOException Wyjątek rzucany, gdy wystąpi błąd podczas ładowania pliku FXML.
+     */
     @FXML
     public void switchToEdycjaTowarow(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("edycjaSprzetuPojazdow.fxml"), HelloApplication.paczkaJezykowa);
@@ -271,6 +359,12 @@ public class ZlecenieWindowController {
         stage.setScene(scene);
         stage.show();
     }
+
+    /**
+     * Przełącza interfejs użytkownika na panel administratora, jeśli użytkownik ma uprawnienia administratora.
+     * @param event Zdarzenie akcji, np. kliknięcie przycisku.
+     * @throws IOException Wyjątek rzucany, gdy wystąpi błąd podczas ładowania pliku FXML.
+     */
     @FXML
     public void switchToAdminPanel(ActionEvent event) throws IOException {
         if (LoginSystem.isAdmin()) {
@@ -285,6 +379,12 @@ public class ZlecenieWindowController {
             stage.show();
         }
     }
+
+    /**
+     * Przełącza interfejs użytkownika na panel ustawień, jeśli użytkownik ma uprawnienia administratora.
+     * @param event Zdarzenie akcji, np. kliknięcie przycisku.
+     * @throws IOException Wyjątek rzucany, gdy wystąpi błąd podczas ładowania pliku FXML.
+     */
     @FXML
     public void switchToUstawienia(ActionEvent event) throws IOException {
         if (LoginSystem.isAdmin()) {
@@ -299,6 +399,7 @@ public class ZlecenieWindowController {
             stage.show();
         }
     }
+
     public void switchToPodsumowanie() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("podsumowanie.fxml"), HelloApplication.paczkaJezykowa);
         Stage podsumowanie = new Stage();
@@ -318,6 +419,13 @@ public class ZlecenieWindowController {
         podsumowanie.setScene(scene);
         podsumowanie.showAndWait();
     }
+
+
+    /**
+     * Obsługuje zdarzenie kliknięcia na menu.
+     * @param event Zdarzenie akcji, np. kliknięcie w menu.
+     */
+
     @FXML
     public void menuClick(ActionEvent event){
         System.out.println("HERE");

@@ -22,17 +22,30 @@ public class LoginWindowController {
     @FXML
     private PasswordField PasswordField1;
     LoginSystem log=new LoginSystem();
+
+    /**
+     * Inicjalizuje kontroler, ustawia fokus na polach tekstowych.
+     */
     @FXML
     public void initialize(){
         TextArea1.setFocusTraversable(true);
         PasswordField1.setFocusTraversable(true);
     }
+
+    /**
+     * Obsługuje kliknięcie przycisku "Hello", ustawia tekst powitalny.
+     */
     @FXML
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
+
+    /**
+     * Obsługuje kliknięcie przycisku logowania.
+     */
     @FXML
     protected void onLoginButtonClick(){System.out.println("cos");}
+
    /* @FXML
     public void switchToZlecenieWindow(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"));
@@ -41,6 +54,13 @@ public class LoginWindowController {
         stage.setScene(scene);
         stage.show();
     }*/
+
+    /**
+     * Obsługuje proces logowania użytkownika.
+     * Jeśli logowanie zakończy się sukcesem, przełącza scenę na okno zleceń.
+     * @param event Zdarzenie akcji.
+     * @throws IOException Jeśli wystąpi błąd wejścia/wyjścia podczas ładowania nowej sceny.
+     */
     public void login(ActionEvent event) throws IOException {
          if (LoginSystem.login(TextArea1.getText(),PasswordField1.getText())) {
              FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"), HelloApplication.paczkaJezykowa);
@@ -56,6 +76,12 @@ public class LoginWindowController {
 
     }
 
+    /**
+     * Obsługuje proces rejestracji nowego użytkownika.
+     * Jeśli rejestracja zakończy się sukcesem, przełącza scenę na okno zleceń.
+     * @param event Zdarzenie akcji.
+     * @throws IOException Jeśli wystąpi błąd wejścia/wyjścia podczas ładowania nowej sceny.
+     */
     public void register(ActionEvent event) throws IOException {
         if (LoginSystem.register(TextArea1.getText(),PasswordField1.getText())) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"), HelloApplication.paczkaJezykowa);

@@ -14,6 +14,10 @@ public class typyTras {
     public static ArrayList<typTrasy> trasyArrayList = new ArrayList<>();
     public static ObservableList<typTrasy> trasyObsList;
 
+    /**
+     * Metoda wczytująca typy tras z pliku JSON do listy.
+     * Jeśli plik jest pusty lub nie istnieje, tworzy nową pustą listę.
+     */
     public static void wczytaj(){
         File f = new File("trasy.json");
         if(f.length() == 0 || !f.exists()){
@@ -37,6 +41,10 @@ public class typyTras {
         trasyArrayList = gson.fromJson(result.toString(), trasaType);
         trasyObsList = FXCollections.observableList(trasyArrayList);
     }
+
+    /**
+     * Metoda zapisująca typy tras do pliku JSON.
+     */
     public static void zapisz(){
         System.out.println("zapisywanie pojazdu");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -51,10 +59,18 @@ public class typyTras {
         }
     }
 
+    /**
+     * Zwraca listę typów tras jako ArrayList.
+     * @return lista typów tras.
+     */
     public static ArrayList<typTrasy> getTrasyArrayList() {
         return trasyArrayList;
     }
 
+    /**
+     * Zwraca listę typów tras jako ObservableList.
+     * @return obserwowalna lista typów tras.
+     */
     public static ObservableList<typTrasy> getTrasyObsList() {
         return trasyObsList;
     }

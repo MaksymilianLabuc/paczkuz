@@ -9,8 +9,14 @@ public class LoginSystem {
     private static final String FILE_NAME = "users.txt";
     private static String user;
 
+    /**
+     * Rejestruje nowego użytkownika z podaną nazwą użytkownika i hasłem.
+     * Sprawdza, czy użytkownik już istnieje i czy pola nie są puste.
+     * @param username Nazwa użytkownika.
+     * @param password Hasło użytkownika.
+     * @return true jeśli rejestracja zakończyła się sukcesem, w przeciwnym razie false.
+     */
     public static boolean register(String username, String password) {
-
         if (username.isEmpty()||password.isEmpty()) { //sprawdzanie czy jest cos wpisane w pola tekstowe
             System.out.println("Nie można utworzyć pustego użytkownika.");
             return false;
@@ -32,6 +38,11 @@ public class LoginSystem {
         return false;
     }
 
+    /**
+     * Sprawdza, czy użytkownik o podanej nazwie już istnieje.
+     * @param username Nazwa użytkownika do sprawdzenia.
+     * @return true jeśli użytkownik istnieje, w przeciwnym razie false.
+     */
     public static boolean userExists(String username) {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
@@ -47,6 +58,13 @@ public class LoginSystem {
         return false;
     }
 
+    /**
+     * Loguje użytkownika na podstawie podanej nazwy użytkownika i hasła.
+     * Sprawdza, czy pola nie są puste i czy dane są poprawne.
+     * @param username Nazwa użytkownika.
+     * @param password Hasło użytkownika.
+     * @return true jeśli logowanie zakończyło się sukcesem, w przeciwnym razie false.
+     */
     public static boolean login(String username, String password) {
         if (username.isEmpty()||password.isEmpty()) { //sprawdzanie czy jest cos wpisane w pola tekstowe
             System.out.println("Błędne dane.");
@@ -69,7 +87,12 @@ public class LoginSystem {
         System.out.println("Błędne dane! Spróbuj ponownie!");
         return false;
     }
-    //Metoda sprawdzająca czy użytkownik jest administratorem, jeśli nie to wyrzuca alert
+
+    /**
+     * Sprawdza, czy zalogowany użytkownik jest administratorem.
+     * Jeśli nie, wyświetla komunikat alertu.
+     * @return true jeśli użytkownik jest administratorem, w przeciwnym razie false.
+     */
     public static boolean isAdmin() {
         if (user.equalsIgnoreCase("admin")) {
             System.out.println("admin");

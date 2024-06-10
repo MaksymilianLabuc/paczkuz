@@ -19,6 +19,10 @@ public class UstawieniaWindowController {
     @FXML
     private ChoiceBox<String> jezykChoiceBox;
     @FXML
+
+    /**
+     * Inicjalizuje wybór motywu i języka na podstawie bieżących ustawień.
+     */
     public void initialize(){
         MotywChoiceBox.getItems().add("Dark mode");
         MotywChoiceBox.getItems().add("Light mode");
@@ -28,18 +32,27 @@ public class UstawieniaWindowController {
         jezykChoiceBox.getItems().add("English");
         jezykChoiceBox.setValue(Ustawienia.getJezyk());
 
+        // Obsługa wyboru języka
         jezykChoiceBox.setOnAction(event -> {
             String wybranyJezyk = jezykChoiceBox.getSelectionModel().getSelectedItem();
             System.out.println(wybranyJezyk);
             Ustawienia.setJezyk(wybranyJezyk);
         });
     }
+
+    /**
+     * Przełącza na okno logowania.
+     * @param event zdarzenie akcji.
+     * @throws IOException wyjątek wejścia/wyjścia.
+     */
     @FXML
     public void switchToLoginWindow(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"), HelloApplication.paczkaJezykowa);
         System.out.println(HelloApplication.paczkaJezykowa.getLocale());
         Stage stage = (Stage) root.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load());
+
+        // Ustawienie wybranego motywu
         Ustawienia.setMotyw(MotywChoiceBox.getValue());
         if(Ustawienia.getMotyw().equals("Dark mode")){
             File cssFile = new File("src/main/resources/dark-mode.css");

@@ -72,6 +72,10 @@ public class edycjaSprzetuController {
     private ObservableList<Towar> dane;
     private ObservableList pojazdy;
     private ObservableList<typTrasy> trasy;
+
+    /**
+     * Inicjalizuje dane tabeli towarów, pojazdów i tras oraz ustawia wartości kolumn.
+     */
     @FXML
     public void initialize(){
         Towary.wczytaj();
@@ -103,6 +107,11 @@ public class edycjaSprzetuController {
     public void wczytajTowary(){
 
     }
+
+    /**
+     * Zapisuje nową trasę na podstawie wprowadzonych danych.
+     * Jeśli pola nazwa, cena i płaca są wypełnione, trasa jest dodawana do listy i zapisywana.
+     */
     public void zapiszTrasy(){
         typTrasy trasa = new typTrasy();
         if(!trasaNazwaTextField.getText().trim().isEmpty() && !trasaPlacaTextField.getText().trim().isEmpty() && !trasaCenaTextField.getText().trim().isEmpty()){
@@ -114,6 +123,10 @@ public class edycjaSprzetuController {
         }
     }
 
+    /**
+     * Zapisuje nowy pojazd na podstawie wprowadzonych danych.
+     * Jeśli pola nazwa, ładowność i spalanie są wypełnione, pojazd jest dodawany do listy i zapisywany.
+     */
     public void zapiszPojazd(){
         if(pojazdNazwaFIeld.getText().trim().isEmpty() || ladownoscPojazdField.getText().trim().isEmpty() || pojazdSpalanieField.getText().trim().isEmpty()){
             System.out.println("Zadne pole nie moze byc puste!");
@@ -130,6 +143,10 @@ public class edycjaSprzetuController {
         Pojazdy.zapisz();
     }
 
+    /**
+     * Zapisuje nowy towar na podstawie wprowadzonych danych.
+     * Jeśli pola nazwa, ciężar i ilość są wypełnione, towar jest dodawany do listy i zapisywany.
+     */
     public void zapiszTowar(){
         if(nazwa.getText().trim().isEmpty() || ciezar.getText().trim().isEmpty()){
             System.out.println("Zadne pole nie moze byc puste!");
@@ -141,12 +158,19 @@ public class edycjaSprzetuController {
         //t.setIlosc(Integer.parseInt(ilosc.getText()));
         Towary.zapisz(t);
     }
+
+    /**
+     * Usuwa wybraną trasę z tabeli i zapisuje zmiany.
+     */
     public void usunTrase(){
         int idx = trasyTab.getSelectionModel().getSelectedIndex();
         trasy.remove(idx);
         typyTras.zapisz();
     }
 
+    /**
+     * Usuwa wybrany pojazd z tabeli i zapisuje zmiany.
+     */
     public void usunPojazd(){
         System.out.println("usuwanie pojazdu");
         int idx = pojazdTabela.getSelectionModel().getSelectedIndex();
@@ -154,10 +178,20 @@ public class edycjaSprzetuController {
         Pojazdy.zapisz();
     }
 
+    /**
+     * Usuwa wybrany towar z tabeli.
+     */
     public void usunTowar(){
         int idx = towaryTab.getSelectionModel().getSelectedIndex();
         Towary.usun(idx);
     }
+
+    /**
+     * Przełącza widok na okno edycji zleceń.
+     * Ładuje nową scenę z odpowiednim plikiem FXML i motywem graficznym.
+     * @param event Zdarzenie akcji wywołane przez użytkownika.
+     * @throws IOException Jeśli wystąpi błąd podczas ładowania pliku FXML.
+     */
     @FXML
     public void switchToEdycjaZlecen(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"), HelloApplication.paczkaJezykowa);

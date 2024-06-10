@@ -9,6 +9,12 @@ public class Mailer {
     private static final String username = "paczkuz@op.pl";
     private static final String password = "hacbeW-jupkor-xuzgi7";
 
+    /**
+     * Wysyła wiadomość e-mail.
+     * @param emails_list Lista adresów e-mail oddzielonych przecinkami.
+     * @param title Temat wiadomości.
+     * @param body Treść wiadomości.
+     */
     public static void sendMail(String emails_list, String title, String body) {
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.poczta.onet.pl");
