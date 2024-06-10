@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -45,9 +46,9 @@ public class edycjaSprzetuController {
     private ArrayList<Towar> towary = new ArrayList<>();
     //private List<Towar> towary = new ArrayList();
     @FXML
-    TableView towaryTab;
+    TableView<Towar> towaryTab;
     @FXML
-    private TableView<?> pojazdTabela;
+    private TableView<Pojazd> pojazdTabela;
     @FXML
     private TableView<typTrasy> trasyTab;
     @FXML
@@ -70,7 +71,7 @@ public class edycjaSprzetuController {
     private TableColumn<Pojazd, Double> colPojazdSpalanie;
     //private ObservableList<Towar> dane = FXCollections.observableArrayList();
     private ObservableList<Towar> dane;
-    private ObservableList pojazdy;
+    private ObservableList<Pojazd> pojazdy;
     private ObservableList<typTrasy> trasy;
 
     /**
@@ -106,6 +107,68 @@ public class edycjaSprzetuController {
 
     public void wczytajTowary(){
 
+    }
+
+    /**
+     * Metoda sprawdza czy został wybrany zapisany towar i otwiera okno edycji.
+     */
+    public void edytujTowar() throws IOException {
+        if (towaryTab.getSelectionModel().isEmpty()){
+            return;
+        }
+        int idx = towaryTab.getSelectionModel().getSelectedIndex();
+        Towar t = towaryTab.getSelectionModel().getSelectedItem();
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("edycjaTowaru.fxml"),HelloApplication.paczkaJezykowa);
+        Parent root = (Parent) fxmlloader.load();
+        EdycjaTowaruController controller = fxmlloader.getController();
+        controller.getNazwa().setText(t.getNazwa());
+        controller.getCiezar().setText(String.valueOf(t.getCiezar()));
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Edycja towaru");
+        Scene scene = new Scene(root);
+        if (Ustawienia.getMotyw().equals("Dark mode")){
+            File cssFile = new File("src/main/resources/dark-mode.css");
+            scene.getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
+        }
+        stage.setScene(scene);
+        stage.showAndWait();
+        t.setNazwa(controller.getNazwa().getText());
+        t.setCiezar(Integer.parseInt(controller.getCiezar().getText()));
+        dane.set(idx,t);
+        Towary.zapiszWszystkie();
+    }
+
+    /**
+     * Metoda sprawdza czy wybrany został zapisany pojazd i otwiera okno edycji.
+     */
+    public void edytujPojazd() throws IOException {
+        if (pojazdTabela.getSelectionModel().isEmpty()){
+            return;
+        }
+        int idx = pojazdTabela.getSelectionModel().getSelectedIndex();
+        Pojazd p = pojazdTabela.getSelectionModel().getSelectedItem();
+        FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("edycjaPojazdu.fxml"),HelloApplication.paczkaJezykowa);
+        Parent root = (Parent) fxmlloader.load();
+        EdycjaPojazduWindowController controller = fxmlloader.getController();
+        controller.getNazwa().setText(p.getNazwa());
+        controller.getLadownosc().setText(String.valueOf(p.getLadownosc()));
+        controller.getSpalanie().setText(String.valueOf(p.getSpalanie()));
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Edycja towaru");
+        Scene scene = new Scene(root);
+        if (Ustawienia.getMotyw().equals("Dark mode")){
+            File cssFile = new File("src/main/resources/dark-mode.css");
+            scene.getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
+        }
+        stage.setScene(scene);
+        stage.showAndWait();
+        p.setNazwa(controller.getNazwa().getText());
+        p.setLadownosc(Double.parseDouble(controller.getLadownosc().getText()));
+        p.setSpalanie(Double.parseDouble(controller.getSpalanie().getText()));
+        pojazdy.set(idx,p);
+        Pojazdy.zapisz();
     }
 
     /**

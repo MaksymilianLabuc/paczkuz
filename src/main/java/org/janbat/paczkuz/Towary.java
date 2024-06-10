@@ -62,6 +62,22 @@ public class Towary {
     }
 
     /**
+     * Metoda zapisująca liste wszystkich towarów
+     */
+    public static void zapiszWszystkie(){
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Type towarType = new TypeToken<ArrayList<Towar>>(){}.getType();
+        String json = gson.toJson(towaryArrayList,towarType);
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("towary.json"));
+            writer.write(json);
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * Metoda usuwająca towar z listy oraz aktualizująca plik JSON.
      * @param idx indeks towaru do usunięcia.
      */
