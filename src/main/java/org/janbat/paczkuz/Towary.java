@@ -14,6 +14,10 @@ public class Towary {
     public static ArrayList<Towar> towaryArrayList = new ArrayList<>();
     public static ObservableList<Towar> towaryObs;
 
+    /**
+     * Metoda wczytująca towary z pliku JSON do listy.
+     * Jeśli plik jest pusty lub nie istnieje, tworzy nową pustą listę.
+     */
     public static void wczytaj(){
         File f = new File("towary.json");
         if(f.length() == 0 || !f.exists()){
@@ -39,6 +43,10 @@ public class Towary {
         towaryObs = FXCollections.observableList(towaryArrayList);
     }
 
+    /**
+     * Metoda zapisująca towar do listy oraz do pliku JSON.
+     * @param t towar do zapisania.
+     */
     public static void zapisz(Towar t){
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         towaryObs.add(t);
@@ -52,6 +60,11 @@ public class Towary {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Metoda usuwająca towar z listy oraz aktualizująca plik JSON.
+     * @param idx indeks towaru do usunięcia.
+     */
     public static void usun(int idx){
         towaryObs.remove(idx);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -66,10 +79,18 @@ public class Towary {
         }
     }
 
+    /**
+     * Zwraca listę towarów jako ArrayList.
+     * @return lista towarów.
+     */
     public static ArrayList<Towar> getTowaryArrayList() {
         return towaryArrayList;
     }
 
+    /**
+     * Zwraca listę towarów jako ObservableList.
+     * @return obserwowalna lista towarów.
+     */
     public static ObservableList<Towar> getTowaryObs() {
         return towaryObs;
     }
