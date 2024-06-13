@@ -60,9 +60,9 @@ public class ZlecenieWindowController {
     private TableColumn<Towar, Integer> nazwaColB;
 
     @FXML
-    private ChoiceBox<Pojazd> pojazdyChoice;
+    ChoiceBox<Pojazd> pojazdyChoice;
     @FXML
-    private ChoiceBox<typTrasy> trasyChoice;
+    ChoiceBox<typTrasy> trasyChoice;
     @FXML
     ListView<String> towaryListView;
     @FXML
@@ -90,12 +90,13 @@ public class ZlecenieWindowController {
         this.trasyChoice = new ChoiceBox<>(FXCollections.observableArrayList());
         this.nazwaColA = new TableColumn<>();
         this.nazwaColB = new TableColumn<>();
-        this.iloscColA = new TableColumn<>();
-        this.iloscColB = new TableColumn<>();
+        //this.iloscColA = new TableColumn<>();
+        //this.iloscColB = new TableColumn<>();
         this.ciezarColA = new TableColumn<>();
         this.ciezarColB = new TableColumn<>();
         this.startZapisaneCol = new TableColumn<>();
         this.celZapisaneCol = new TableColumn<>();
+        this.oplaconeZapisaneCol = new TableColumn<>();
         this.dystansZapisaneCol = new TableColumn<>();
         this.cenaZapisaneCol = new TableColumn<>();
         this.listaTowarowTab = new TableView<>();
@@ -149,6 +150,22 @@ public class ZlecenieWindowController {
     }
     @FXML
     public void oblicz() throws IOException {
+        if(start.getText().trim().isEmpty() || cel.getText().trim().isEmpty() || trasyChoice.getSelectionModel().isEmpty() || pojazdyChoice.getSelectionModel().isEmpty() || towaryWZleceniu.isEmpty()){
+            Alert nieWybranoPojzdu = new Alert(Alert.AlertType.ERROR);
+            nieWybranoPojzdu.setTitle("Błąd");
+            nieWybranoPojzdu.setContentText(HelloApplication.paczkaJezykowa.getString("bladObliczenia"));
+            if (Ustawienia.getMotyw().equals("Dark mode")){
+                File cssFile = new File("src/main/resources/dark-mode.css");
+                nieWybranoPojzdu.getDialogPane().getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
+            }
+            nieWybranoPojzdu.showAndWait();
+            return;
+        }
+        z.cel = cel.getText();
+        z.start = start.getText();
+        z.setTowary(towaryWZleceniuArrayList);
+        z.setWybranyPojazd(pojazdyChoice.getSelectionModel().getSelectedItem());
+        z.setWybranyTypTrasy(trasyChoice.getSelectionModel().getSelectedItem());
         Double D = Double.valueOf(API.getDistanceOfTowns(z.getStart(),z.getCel())) / 1000; // Dystans między miastem startowym a docelowym
         Double S = z.getWybranyPojazd().getSpalanie(); // Spalanie na 100km
         Double C = 7.0; // Cena paliwa za litr
@@ -188,12 +205,12 @@ public class ZlecenieWindowController {
         System.out.println(z);
 
         // Tworzenie tytułu i treści maila z potwierdzeniem zlecenia
-        String title = "Potwierdzenie zlecenia";
+        String title = HelloApplication.paczkaJezykowa.getString("mailTytul");
         String towars = "";
         for (Towar t: z.towary) {
             towars += ("\t" + "x " + t.nazwa + ", " + t.ciezar + "\n");
         }
-        String body = "Start: " + z.start + " Cel: " + z.cel + "\n" + towars;
+        String body = HelloApplication.paczkaJezykowa.getString("start") + ": " + z.start + " "+ HelloApplication.paczkaJezykowa.getString("cel")+": " + z.cel + "\n" + towars;
 
         // Ładowanie widoku do wysyłania maila
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("get-mail.fxml"),HelloApplication.paczkaJezykowa);
@@ -252,8 +269,14 @@ public class ZlecenieWindowController {
      * Usuwa zaznaczony towar z aktualnego zlecenia.
      */
     public void usunTowarZzlecenia(){
+        if(dodaneTowryTab.getSelectionModel().isEmpty()){
+            return;
+        }
         int idx = dodaneTowryTab.getSelectionModel().getSelectedIndex();
+        z.setObjetoscCalkowita(z.getObjetoscCalkowita()-towaryWZleceniu.get(idx).getCiezar());
+        pozostalaLadownoscLabel.setText(String.valueOf(z.getWybranyPojazd().getLadownosc()-z.getObjetoscCalkowita()));
         towaryWZleceniu.remove(idx);
+
     }
 
     /**
@@ -267,7 +290,11 @@ public class ZlecenieWindowController {
         if(z.getWybranyPojazd() == null){
             Alert nieWybranoPojzdu = new Alert(Alert.AlertType.WARNING);
             nieWybranoPojzdu.setTitle("Ostrzeżenie");
-            nieWybranoPojzdu.setContentText("Nie wybrano pojazdu!!!");
+            nieWybranoPojzdu.setContentText(HelloApplication.paczkaJezykowa.getString("pojazdAlert"));
+            if (Ustawienia.getMotyw().equals("Dark mode")){
+                File cssFile = new File("src/main/resources/dark-mode.css");
+                nieWybranoPojzdu.getDialogPane().getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
+            }
             nieWybranoPojzdu.showAndWait();
             return;
         }
@@ -275,7 +302,7 @@ public class ZlecenieWindowController {
         int idx = listaTowarowTab.getSelectionModel().getSelectedIndex();
 
         // Sprawdza, czy został wybrany towar
-        if(z.getObjetoscCalkowita()+towary.get(idx).getCiezar() < z.getWybranyPojazd().getLadownosc()) {
+        if(z.getObjetoscCalkowita()+towary.get(idx).getCiezar() <= z.getWybranyPojazd().getLadownosc()) {
             towaryWZleceniu.add(towary.get(idx));
             z.setObjetoscCalkowita(z.getObjetoscCalkowita()+towary.get(idx).getCiezar());
             pozostalaLadownoscLabel.setText(String.valueOf(z.getWybranyPojazd().getLadownosc()-z.getObjetoscCalkowita()));
@@ -284,7 +311,11 @@ public class ZlecenieWindowController {
             // Wyświetla komunikat o przekroczeniu dostępnej pojemności pojazdu
             Alert przekroczonaPojemnoscError = new Alert(Alert.AlertType.ERROR);
             przekroczonaPojemnoscError.setTitle("Error");
-            przekroczonaPojemnoscError.setContentText("Przekroczono dostępną pojemność pojazdu!!!");
+            przekroczonaPojemnoscError.setContentText(HelloApplication.paczkaJezykowa.getString("pojemnoscAlert"));
+            if (Ustawienia.getMotyw().equals("Dark mode")){
+                File cssFile = new File("src/main/resources/dark-mode.css");
+                przekroczonaPojemnoscError.getDialogPane().getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
+            }
             przekroczonaPojemnoscError.showAndWait();
         }
     }
@@ -297,6 +328,17 @@ public class ZlecenieWindowController {
      */
     public void zapisz(){
         //Zlecenie z = new Zlecenie();
+        if(start.getText().trim().isEmpty() || cel.getText().trim().isEmpty() || trasyChoice.getSelectionModel().isEmpty() || pojazdyChoice.getSelectionModel().isEmpty() || towaryWZleceniu.isEmpty()) {
+            Alert bladZapisu = new Alert(Alert.AlertType.ERROR);
+            bladZapisu.setTitle("Błąd");
+            bladZapisu.setContentText(HelloApplication.paczkaJezykowa.getString("bladZapisu"));
+            if (Ustawienia.getMotyw().equals("Dark mode")){
+                File cssFile = new File("src/main/resources/dark-mode.css");
+                bladZapisu.getDialogPane().getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
+            }
+            bladZapisu.showAndWait();
+            return;
+        }
 
         // Sprawdza, czy zlecenie już istnieje w liście zleceń
         Boolean isnieje = false;

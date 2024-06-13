@@ -18,19 +18,9 @@
    <children>
       <MenuBar>
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="%plik">
             <items>
-              <MenuItem fx:id="wrocButton" mnemonicParsing="false" onAction="#switchToEdycjaZlecen" text="Wroc" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="wrocButton" mnemonicParsing="false" onAction="#switchToEdycjaZlecen" text="%wroc" />
             </items>
           </Menu>
         </menus>

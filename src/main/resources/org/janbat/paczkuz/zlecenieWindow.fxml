@@ -20,21 +20,16 @@
    <children>
       <MenuBar>
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="%plik">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#switchToLoginWindow" text="Wyloguj" />
+              <MenuItem mnemonicParsing="false" onAction="#switchToLoginWindow" text="%wyloguj" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="%edytuj">
             <items>
-                <MenuItem mnemonicParsing="false" onAction="#switchToEdycjaTowarow" text="Edytuj" />
-                <MenuItem mnemonicParsing="false" onAction="#switchToAdminPanel" text="Admin" />
-                  <MenuItem mnemonicParsing="false" onAction="#switchToUstawienia" text="Ustawienia" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+                <MenuItem mnemonicParsing="false" onAction="#switchToEdycjaTowarow" text="%edytuj" />
+                <MenuItem mnemonicParsing="false" onAction="#switchToAdminPanel" text="%admin" />
+                  <MenuItem mnemonicParsing="false" onAction="#switchToUstawienia" text="%ustawienia" />
             </items>
           </Menu>
         </menus>
@@ -75,9 +70,9 @@
                         <FlowPane alignment="CENTER" hgap="10.0" prefHeight="30.0" prefWidth="600.0">
                            <children>
                               <Label text="%max_ladownosc" />
-                              <Label fx:id="maxLadownoscLabel" text="[ladownosc]" />
+                              <Label fx:id="maxLadownoscLabel" />
                               <Label text="%pozostala_ladownosc" />
-                              <Label fx:id="pozostalaLadownoscLabel" text="[pozostala ladownosc]" />
+                              <Label fx:id="pozostalaLadownoscLabel" />
                            </children>
                         </FlowPane>
                         <HBox prefHeight="200.0" prefWidth="1107.0">
@@ -95,7 +90,7 @@
                               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                                  <children>
                                     <Button mnemonicParsing="false" onAction="#dodajTowarDoZlecenia" text="%dodaj" />
-                                    <Button mnemonicParsing="false" text="%usun" />
+                                    <Button mnemonicParsing="false" onAction="#usunTowarZzlecenia" text="%usun" />
                                  </children>
                                  <HBox.margin>
                                     <Insets />

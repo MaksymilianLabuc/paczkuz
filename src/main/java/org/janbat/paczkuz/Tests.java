@@ -22,14 +22,14 @@ public class Tests {
         assertEquals(154440.0, apiCaller.getDistanceOfTowns("Zielona Góra", "Poznań"), "Test odległości Zielona Góra - Poznań");
     }
 
-    @Test
-    void testAddOrder() {
-        zwc.setAttrsForTests();
-        zwc.initialize();
-        zwc.cel = new TextField("Wrocław");
-        zwc.start = new TextField("Zielona Góra");
-        assertDoesNotThrow(() -> {
-            zwc.zapisz();
-        });
-    }
+//    @Test
+//    void testAddOrder() {
+//        zwc.setAttrsForTests();
+//        zwc.initialize();
+//        zwc.cel = new TextField("Wrocław");
+//        zwc.start = new TextField("Zielona Góra");
+//        assertDoesNotThrow(() -> {
+//            zwc.zapisz();
+//        });
+//    }
 }

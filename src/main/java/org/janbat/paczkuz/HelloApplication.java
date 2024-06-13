@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 
 public class HelloApplication extends Application {
     // Zasoby językowe dla interfejsu użytkownika
-    public static ResourceBundle paczkaJezykowa = ResourceBundle.getBundle("org.janbat.paczkuz.language", Locale.getDefault());
+    public static ResourceBundle paczkaJezykowa = ResourceBundle.getBundle("org.janbat.paczkuz.language", Ustawienia.getJezyki().get(Ustawienia.getJezyk()));
 
     /**
      * Metoda startująca aplikację, ładująca widok logowania.

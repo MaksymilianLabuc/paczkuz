@@ -1,4 +1,1 @@
-tego,cos
-cos,tegi
 admin,admin
-ktos,nowy

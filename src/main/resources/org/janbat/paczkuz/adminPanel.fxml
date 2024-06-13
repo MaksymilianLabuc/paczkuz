@@ -16,9 +16,9 @@
    <children>
       <MenuBar>
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="%plik">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#switchToZlecenia" text="Powrót" />
+              <MenuItem mnemonicParsing="false" onAction="#switchToZlecenia" text="%wroc" />
             </items>
           </Menu>
         </menus>
