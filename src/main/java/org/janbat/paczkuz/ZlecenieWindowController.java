@@ -133,7 +133,7 @@ public class ZlecenieWindowController {
         startZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("start"));
         celZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("cel"));
         dystansZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("dystans"));
-        cenaZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("cenaZaKm"));
+        cenaZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("cenaCalkowita"));
         oplaconeZapisaneCol.setCellValueFactory(new PropertyValueFactory<>("oplacone"));
 
         listaTowarowTab.setItems(towary);
@@ -150,7 +150,7 @@ public class ZlecenieWindowController {
     }
     @FXML
     public void oblicz() throws IOException {
-        if(start.getText().trim().isEmpty() || cel.getText().trim().isEmpty() || trasyChoice.getSelectionModel().isEmpty() || pojazdyChoice.getSelectionModel().isEmpty() || towaryWZleceniu.isEmpty()){
+        if(start.getText().trim().isEmpty() || cel.getText().trim().isEmpty() || trasyChoice.getValue()==null || pojazdyChoice.getValue()==null || towaryWZleceniu.isEmpty()){
             Alert nieWybranoPojzdu = new Alert(Alert.AlertType.ERROR);
             nieWybranoPojzdu.setTitle("Błąd");
             nieWybranoPojzdu.setContentText(HelloApplication.paczkaJezykowa.getString("bladObliczenia"));
@@ -175,9 +175,11 @@ public class ZlecenieWindowController {
         Double Kp = (S * C) * (D/100); // Koszt paliwa
         Double Kc = Kk+Kp+z.getWybranyTypTrasy().getCenaViatoll(); // koszt całkowity
         Double Kkm = Kc/D; // koszt za kilometr
-        z.setCenaZaKm(Kkm);
-        z.setCenaCalkowita(Kc);
-        z.setDystans(D);
+        z.setCenaZaKm((double) Math.round(Kkm*100.0)/100.0);
+        z.setCenaCalkowita((double) Math.round(Kc*100.0)/100.0);
+        z.setDystans((double) Math.round(D*100.0)/100.0);
+        Zlecenia.zapiszWszystkie();
+        zapisaneTab.refresh();
         switchToPodsumowanie();
     }
     public void oplacZlecenie(){
