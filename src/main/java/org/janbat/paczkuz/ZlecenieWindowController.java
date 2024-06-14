@@ -328,7 +328,7 @@ public class ZlecenieWindowController {
      */
     public void zapisz(){
         //Zlecenie z = new Zlecenie();
-        if(start.getText().trim().isEmpty() || cel.getText().trim().isEmpty() || trasyChoice.getSelectionModel().isEmpty() || pojazdyChoice.getSelectionModel().isEmpty() || towaryWZleceniu.isEmpty()) {
+        if(start.getText().trim().isEmpty() || cel.getText().trim().isEmpty() || trasyChoice.getValue()==null || pojazdyChoice.getValue()==null || towaryWZleceniu.isEmpty()) {
             Alert bladZapisu = new Alert(Alert.AlertType.ERROR);
             bladZapisu.setTitle("Błąd");
             bladZapisu.setContentText(HelloApplication.paczkaJezykowa.getString("bladZapisu"));
@@ -364,6 +364,7 @@ public class ZlecenieWindowController {
                 if(zleceniaObs.get(i).getId() == z.getId()) idx = zleceniaObs.get(i).getId();
             }
             zleceniaObs.set(idx,z);
+            Zlecenia.zapiszWszystkie();
         }
     }
 
