@@ -149,6 +149,19 @@ public class ZlecenieWindowController {
         });
     }
     @FXML
+    public void anuluj(){
+        z = new Zlecenie(zleceniaObs);
+        start.setText(null);
+        cel.setText(null);
+        trasyChoice.setValue(null);
+        pojazdyChoice.setValue(null);
+        towaryWZleceniuArrayList = z.getTowary();
+        towaryWZleceniu = FXCollections.observableList(towaryWZleceniuArrayList);
+        dodaneTowryTab.setItems(towaryWZleceniu);
+        dodaneTowryTab.refresh();
+    }
+
+    @FXML
     public void oblicz() throws IOException {
         if(start.getText().trim().isEmpty() || cel.getText().trim().isEmpty() || trasyChoice.getValue()==null || pojazdyChoice.getValue()==null || towaryWZleceniu.isEmpty()){
             Alert nieWybranoPojzdu = new Alert(Alert.AlertType.ERROR);
@@ -178,7 +191,7 @@ public class ZlecenieWindowController {
         z.setCenaZaKm((double) Math.round(Kkm*100.0)/100.0);
         z.setCenaCalkowita((double) Math.round(Kc*100.0)/100.0);
         z.setDystans((double) Math.round(D*100.0)/100.0);
-        Zlecenia.zapiszWszystkie();
+        zapisz();
         zapisaneTab.refresh();
         switchToPodsumowanie();
     }
@@ -330,7 +343,7 @@ public class ZlecenieWindowController {
      */
     public void zapisz(){
         //Zlecenie z = new Zlecenie();
-        if(start.getText().trim().isEmpty() || cel.getText().trim().isEmpty() || trasyChoice.getValue()==null || pojazdyChoice.getValue()==null || towaryWZleceniu.isEmpty()) {
+        if(start.getText().isEmpty() || cel.getText().isEmpty() || trasyChoice.getValue()==null || pojazdyChoice.getValue()==null || towaryWZleceniu.isEmpty()) {
             Alert bladZapisu = new Alert(Alert.AlertType.ERROR);
             bladZapisu.setTitle("Błąd");
             bladZapisu.setContentText(HelloApplication.paczkaJezykowa.getString("bladZapisu"));

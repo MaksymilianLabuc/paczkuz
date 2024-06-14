@@ -112,7 +112,7 @@
                            <children>
                               <Button mnemonicParsing="false" onAction="#oblicz" text="%oblicz" />
                               <Button mnemonicParsing="false" onAction="#zapisz" text="%zapisz" />
-                              <Button mnemonicParsing="false" onAction="#switchToLoginWindow" text="%anuluj" />
+                              <Button mnemonicParsing="false" onAction="#anuluj" text="%anuluj" />
                            </children>
                         </HBox>
                      </children>
