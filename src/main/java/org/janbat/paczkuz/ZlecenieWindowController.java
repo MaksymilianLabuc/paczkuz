@@ -376,7 +376,7 @@ public class ZlecenieWindowController {
         } else if (isnieje) {
             int idx = 0;
             for(int i=0; i<zleceniaObs.size(); i++){
-                if(zleceniaObs.get(i).getId() == z.getId()) idx = zleceniaObs.get(i).getId();
+                if(zleceniaObs.get(i).getId() == z.getId()) idx = i;
             }
             zleceniaObs.set(idx,z);
             Zlecenia.zapiszWszystkie();

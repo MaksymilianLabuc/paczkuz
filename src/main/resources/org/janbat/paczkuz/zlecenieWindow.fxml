@@ -81,7 +81,6 @@
                                 <columns>
                                   <TableColumn fx:id="nazwaColA" minWidth="-Infinity" prefWidth="75.0" text="%nazwa" />
                                   <TableColumn fx:id="ciezarColA" prefWidth="75.0" text="%ciezar" />
-                                    <TableColumn fx:id="iloscColA" prefWidth="75.0" text="%ilosc" />
                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -100,7 +99,6 @@
                                 <columns>
                                   <TableColumn fx:id="nazwaColB" prefWidth="76.0" text="%nazwa" />
                                   <TableColumn fx:id="ciezarColB" prefWidth="74.0" text="%ciezar" />
-                                    <TableColumn fx:id="iloscColB" prefWidth="74.0" text="%ilosc" />
                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
