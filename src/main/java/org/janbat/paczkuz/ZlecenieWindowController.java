@@ -217,7 +217,6 @@ public class ZlecenieWindowController {
 
         // Przypisanie zaznaczonego zlecenia
         z = zleceniaObs.get(idx);
-        System.out.println(z);
 
         // Tworzenie tytułu i treści maila z potwierdzeniem zlecenia
         String title = HelloApplication.paczkaJezykowa.getString("mailTytul");
@@ -270,6 +269,9 @@ public class ZlecenieWindowController {
 
         //Automatycznie przełącza użytkownika do zakładki edycji zleceń
         zakladki.getSelectionModel().select(0);
+
+        // Ustawienie pozostałej ładowności pojazdu jako tekst
+        pozostalaLadownoscLabel.setText(String.valueOf(z.getWybranyPojazd().getLadownosc()-z.getObjetoscCalkowita()));
     }
 
     /**

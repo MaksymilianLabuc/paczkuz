@@ -21,7 +21,6 @@ public class Towary {
     public static void wczytaj(){
         File f = new File("towary.json");
         if(f.length() == 0 || !f.exists()){
-            System.out.println("HEREEEEE");
             towaryArrayList = new ArrayList<Towar>();
             towaryObs = FXCollections.observableList(towaryArrayList);
             return;
@@ -36,7 +35,6 @@ public class Towary {
         } catch (Exception e) {
 
         }
-        System.out.println(result);
         Gson gson = new Gson();
         Type towarType = new TypeToken<ArrayList<Towar>>(){}.getType();
         towaryArrayList = gson.fromJson(result.toString(), towarType);

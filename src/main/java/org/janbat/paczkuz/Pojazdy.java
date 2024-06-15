@@ -42,7 +42,6 @@ public class Pojazdy {
      * Zapisuje listę pojazdów do pliku JSON.
      */
     public static void zapisz(){
-        System.out.println("zapisywanie pojazdu");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Type pojazdType = new TypeToken<ArrayList<Pojazd>>(){}.getType();
         String json = gson.toJson(pojazdyArrayList,pojazdType);

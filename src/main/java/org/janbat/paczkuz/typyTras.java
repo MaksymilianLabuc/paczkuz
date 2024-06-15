@@ -35,7 +35,6 @@ public class typyTras {
         } catch (Exception e) {
 
         }
-        System.out.println(result);
         Gson gson = new Gson();
         Type trasaType = new TypeToken<ArrayList<typTrasy>>(){}.getType();
         trasyArrayList = gson.fromJson(result.toString(), trasaType);
@@ -46,7 +45,6 @@ public class typyTras {
      * Metoda zapisująca typy tras do pliku JSON.
      */
     public static void zapisz(){
-        System.out.println("zapisywanie pojazdu");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Type trasaType = new TypeToken<ArrayList<typTrasy>>(){}.getType();
         String json = gson.toJson(trasyArrayList,trasaType);

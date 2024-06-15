@@ -235,7 +235,6 @@ public class edycjaSprzetuController {
      * Usuwa wybrany pojazd z tabeli i zapisuje zmiany.
      */
     public void usunPojazd(){
-        System.out.println("usuwanie pojazdu");
         int idx = pojazdTabela.getSelectionModel().getSelectedIndex();
         pojazdy.remove(idx);
         Pojazdy.zapisz();

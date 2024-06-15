@@ -35,7 +35,6 @@ public class UstawieniaWindowController {
         // Obsługa wyboru języka
         jezykChoiceBox.setOnAction(event -> {
             String wybranyJezyk = jezykChoiceBox.getSelectionModel().getSelectedItem();
-            System.out.println(wybranyJezyk);
             Ustawienia.setJezyk(wybranyJezyk);
         });
     }
@@ -48,7 +47,6 @@ public class UstawieniaWindowController {
     @FXML
     public void switchToLoginWindow(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zlecenieWindow.fxml"), HelloApplication.paczkaJezykowa);
-        System.out.println(HelloApplication.paczkaJezykowa.getLocale());
         Stage stage = (Stage) root.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load());
 
