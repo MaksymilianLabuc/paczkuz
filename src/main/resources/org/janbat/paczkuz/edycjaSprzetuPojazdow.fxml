@@ -79,29 +79,22 @@
                            <children>
                               <TableView fx:id="towaryTab" prefHeight="200.0" prefWidth="600.0">
                                  <columns>
-                                    <TableColumn fx:id="colNazwa" prefWidth="200.0" text="%nazwa" />
-                                    <TableColumn fx:id="colCiezar" prefWidth="200.0" text="%ciezar_t" />
-                                    <TableColumn fx:id="colilosc" prefWidth="200.0" text="%ilosc" />
+                                    <TableColumn fx:id="colNazwa" prefWidth="300.0" text="%nazwa" />
+                                    <TableColumn fx:id="colCiezar" prefWidth="300.0" text="%ciezar_t" />
                                  </columns>
                               </TableView>
                            </children>
                         </FlowPane>
-                        <FlowPane prefHeight="50.0" prefWidth="200.0">
+                        <FlowPane prefHeight="75.0" prefWidth="200.0">
                            <children>
                               <Label prefHeight="18.0" prefWidth="200.0" text="%nazwa" />
-                              <TextArea fx:id="nazwa" prefHeight="50.0" prefWidth="400.0" />
+                              <TextArea fx:id="nazwa" prefHeight="75.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>
-                        <FlowPane prefHeight="50.0" prefWidth="200.0">
+                        <FlowPane prefHeight="75.0" prefWidth="200.0">
                            <children>
                               <Label prefHeight="18.0" prefWidth="200.0" text="%ciezar_t" />
-                              <TextArea fx:id="ciezar" prefHeight="50.0" prefWidth="400.0" />
-                           </children>
-                        </FlowPane>
-                        <FlowPane prefHeight="50.0" prefWidth="200.0">
-                           <children>
-                              <Label prefHeight="18.0" prefWidth="200.0" text="%ilosc" />
-                              <TextArea fx:id="ilosc" prefHeight="50.0" prefWidth="400.0" />
+                              <TextArea fx:id="ciezar" prefHeight="75.0" prefWidth="400.0" />
                            </children>
                         </FlowPane>
                         <FlowPane prefHeight="50.0" prefWidth="200.0">
