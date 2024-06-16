@@ -427,15 +427,17 @@ public class ZlecenieWindowController {
      */
     @FXML
     public void switchToEdycjaTowarow(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("edycjaSprzetuPojazdow.fxml"), HelloApplication.paczkaJezykowa);
-        Stage stage = (Stage) root.getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load());
-        if (Ustawienia.getMotyw().equals("Dark mode")){
-            File cssFile = new File("src/main/resources/dark-mode.css");
-            scene.getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
+        if (LoginSystem.isAdmin()) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("edycjaSprzetuPojazdow.fxml"), HelloApplication.paczkaJezykowa);
+            Stage stage = (Stage) root.getScene().getWindow();
+            Scene scene = new Scene(fxmlLoader.load());
+            if (Ustawienia.getMotyw().equals("Dark mode")) {
+                File cssFile = new File("src/main/resources/dark-mode.css");
+                scene.getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
+            }
+            stage.setScene(scene);
+            stage.show();
         }
-        stage.setScene(scene);
-        stage.show();
     }
 
     /**
@@ -465,17 +467,15 @@ public class ZlecenieWindowController {
      */
     @FXML
     public void switchToUstawienia(ActionEvent event) throws IOException {
-        if (LoginSystem.isAdmin()) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ustawienia.fxml"),HelloApplication.paczkaJezykowa);
-            Stage stage = (Stage) root.getScene().getWindow();
-            Scene scene = new Scene(fxmlLoader.load());
-            if (Ustawienia.getMotyw().equals("Dark mode")){
-                File cssFile = new File("src/main/resources/dark-mode.css");
-                scene.getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
-            }
-            stage.setScene(scene);
-            stage.show();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ustawienia.fxml"),HelloApplication.paczkaJezykowa);
+        Stage stage = (Stage) root.getScene().getWindow();
+        Scene scene = new Scene(fxmlLoader.load());
+        if (Ustawienia.getMotyw().equals("Dark mode")){
+            File cssFile = new File("src/main/resources/dark-mode.css");
+            scene.getStylesheets().add(cssFile.toURI().toString()); //zmiana na tryb ciemny
         }
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void switchToPodsumowanie() throws IOException {
