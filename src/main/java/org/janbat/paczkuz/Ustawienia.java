@@ -9,7 +9,7 @@ public class Ustawienia {
     private static HashMap<String, Locale> jezyki = new HashMap<String,Locale>(){{
         put("Polski",Locale.of("pl"));
         put("English",Locale.of("en","US"));
-        put("Japanese",Locale.of("ja","JP"));
+        put("日本語",Locale.of("ja","JP"));
     }}; //Lista języków
     private static String jezyk = "Polski";
 

@@ -28,7 +28,7 @@ public class UstawieniaWindowController {
         MotywChoiceBox.getItems().add("Light mode");
         MotywChoiceBox.setValue(Ustawienia.getMotyw());
         jezykChoiceBox.getItems().add("Polski");
-        jezykChoiceBox.getItems().add("Japanese");
+        jezykChoiceBox.getItems().add("日本語");
         jezykChoiceBox.getItems().add("English");
         jezykChoiceBox.setValue(Ustawienia.getJezyk());
 
